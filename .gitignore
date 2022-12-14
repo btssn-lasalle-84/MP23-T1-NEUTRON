@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# tvaira
+.vscode
+*.swp
