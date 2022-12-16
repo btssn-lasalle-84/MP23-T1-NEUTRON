@@ -11,6 +11,7 @@
 
 #include "Ihm.h"
 #include "Plateau.h"
+
 #include <iostream>
 
 Ihm::Ihm()
@@ -21,7 +22,7 @@ Ihm::~Ihm()
 {
 }
 
-void Ihm::afficherPlateau(Plateau& plateau)
+void Ihm::afficherPlateau(Plateau& plateau) const
 {
     for(i = 0, i < 5, ++i)
         for(loop = 0, loop < 21)
@@ -38,7 +39,7 @@ void Ihm::afficherPlateau(Plateau& plateau)
     std::cout << std::endl;
 }
 
-std::string* definirJoueurs()
+std::string* definirJoueurs() const
 {
     std::string joueurs[2];
 

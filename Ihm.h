@@ -9,6 +9,7 @@
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
+#include <string>
 #ifndef IHM_H
 #define IHM_H
 
@@ -18,8 +19,8 @@ class Ihm
     Ihm();
     ~Ihm();
 
-    void         afficherPlateau(Plateau& plateau);
-    std::string* definirJoueurs();
+    void         afficherPlateau(Plateau& plateau) const;
+    std::string* definirJoueurs() const;
 }
 
 #endif
