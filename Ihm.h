@@ -9,17 +9,16 @@
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
-#ifndef     IHM_H
-# define    IHM_H
+#ifndef IHM_H
+#define IHM_H
 
-class   Ihm
-{   
-    public:
-      Ihm();
-      ~Ihm();
-      
-      void  afficherPlateau(Plateau &plateau);
-      std::string   *definirJoueurs();
+class Ihm {
+public:
+  Ihm();
+  ~Ihm();
+
+  void afficherPlateau(Plateau &plateau);
+  std::string *definirJoueurs();
 }
 
 #endif
