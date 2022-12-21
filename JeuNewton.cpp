@@ -10,31 +10,64 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 
 #include "JeuNewton.h"
-#include "Ihm.h"
-#include "string"
 
-class Plateau;
-
-JeuNewton::JeuNewton() : ihm(new IHM), plateau(new Plateau), joueurActif(0) {}
-
-JeuNewton::~JeuNewton() {
-  delete this->ihm;
-  delete this->plateau;
+JeuNewton::JeuNewton() : joueurActif(0)
+{
 }
 
-void JeuNewton::setJoueurActif(bool joueurActif) {
-  this->joueurActif = joueurActif;
+JeuNewton::~JeuNewton()
+{
+    delete &this->ihm;
+    delete &this->plateau;
 }
 
-bool JeuNewton::getJoueurActif() const { return this->joueurActif; }
-
-void JeuNewton::setJoueurs(const std::string *joueurs) {
-  this->joueurs[0] = joueurs[0];
-  this->joueurs[1] = joueurs[1];
+void JeuNewton::setJoueurActif(bool joueurActif)
+{
+    this->joueurActif = joueurActif;
 }
 
-std::string JeuNewton::getJoueur(unsigned int numero) const {
-  return this->joueurs[numero];
+bool JeuNewton::getJoueurActif() const
+{
+    return this->joueurActif;
 }
 
-void JeuNewton::demarrer() { this->setJoueurs(this->ihm.definirJoueurs()); }
+int JeuNewton::demarrer()
+{
+    bool premierCoup  = 1;
+    bool partieGagnee = 0;
+
+    this->ihm.definirJoueurs(0);
+    this->ihm.definirJoueurs(1);
+    while(!partieGagnee)
+    {
+        unsigned int entreeInvalide = 1;
+        while(!entreeInvalide)
+        {
+            entreeInvalide = this->plateau.deplaceUnPion(
+              this->ihm.demandeUneDirection(this->joueurActif));
+            if(!entreeInvalide)
+                this->ihm.ecrireErreur(entreeInvalide);
+        }
+        this->ihm.afficherPlateau(this->plateau);
+        partieGagnee = this->plateau.pionEstCoince();
+        if(!premierCoup && !partieGagnee)
+        {
+            entreeInvalide = 1;
+            while(!entreeInvalide)
+            {
+                entreeInvalide = this->plateau.deplaceUnPion(
+                  this->ihm.selectionneUnPion(this->joueurActif),
+                  this->ihm.demandeUneDirection(this->joueurActif),
+                  joueurActif);
+            }
+            this->ihm.afficherPlateau(this->plateau);
+            partieGagnee =
+              this->plateau.pionsSontCoinces(unsigned int joueurActif);
+        }
+        else
+            premierCoup = 0;
+        this->ihm.felicitater(joueurActif);
+        this->joueurActif = (this->joueurActif + 1) % 2;
+    }
+    return 0;
+}

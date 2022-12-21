@@ -22,32 +22,27 @@ Ihm::~Ihm()
 {
 }
 
-void Ihm::afficherPlateau(Plateau& plateau) const
+void Ihm::afficherPlateau(const Plateau& plateau) const
 {
-    for(i = 0, i < 5, ++i)
-        for(loop = 0, loop < 21)
+    for(unsigned int i = 0; i < LARGEUR_DAMIER; ++i)
+    {
+        for(unsigned int indiceCase = 0; indiceCase < NB_TIRETS; ++indiceCase)
             std::cout << "_";
-    std::cout << std::endl;
-    for(loop = 0, loop < 5)
-        std::cout << "|   ";
-    std::cout << "|" << std::endl;
-    for(j = 0, j < 5)
-        std::cout << "| " << plateau[i, j] << " ";
-    std::cout << "|" << std::endl;
-    for(loop = 0, loop < 21)
+        std::cout << std::endl;
+        for(unsigned int j = 0; j < LARGEUR_DAMIER; ++j)
+            std::cout << "|   ";
+        std::cout << "|" << std::endl;
+        for(unsigned int j = 0; j < LARGEUR_DAMIER; ++j)
+            std::cout << "| " << plateau.getContenuCase(i, j) << " ";
+        std::cout << "|" << std::endl;
+    }
+    for(unsigned int colonne = 0; colonne < NB_TIRETS; ++colonne)
         std::cout << "_";
     std::cout << std::endl;
 }
 
-std::string* definirJoueurs() const
+std::string Ihm::definirJoueurs(unsigned int numero)
 {
-    std::string joueurs[2];
-
-    std::cout << "Saisir le nom du premier Joueur" << endl;
-    cin >> joueurs[0];
-    do
-    {
-        cout << "Saisir le nom du second Joueur" cin >> joueur[1];
-    } while(joueurs[0] == joueurs[1]);
-    return joueurs;
+    std::cout << "Saisir le nom du joueur numero " << numero << std::endl;
+    std::cin >> this->joueurs[numero];
 }
