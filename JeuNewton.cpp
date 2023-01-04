@@ -62,7 +62,7 @@ int JeuNewton::demarrer()
             }
             this->ihm.afficherPlateau(this->plateau);
             partieGagnee =
-              this->plateau.pionsSontCoinces(unsigned int joueurActif);
+              this->plateau.pionsSontCoinces(joueurActif);
         }
         else
             premierCoup = 0;

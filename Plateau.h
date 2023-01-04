@@ -12,6 +12,8 @@
 #ifndef PLATEAU_H
 #define PLATEAU_H
 #define NEUTRON_XY 5
+#define NB_LIGNES 5
+#define NB_COLONNES 5
 
 #include <vector>
 
@@ -31,6 +33,7 @@ class Plateau
 
     bool pionEstCoince(unsigned int i = NEUTRON_XY,
                        unsigned int j = NEUTRON_XY) const;
+    bool pionsSontCoinces(bool joueurActif) const;
     int  deplaceUnPion(unsigned int direction,
                        unsigned int i           = NEUTRON_XY,
                        unsigned int j           = NEUTRON_XY,
