@@ -13,27 +13,27 @@
 #define JEU_NEWTON_H
 
 #include <string>
+#include "Ihm.h"
+#include "Plateau.h"
 
 class IHM;
 class Plateau;
 
-class JeuNewton {
-private:
-  IHM ihm;
-  Plateau plateau;
-  std::string joueurs[2];
-  bool joueurActif;
+class JeuNewton
+{
+  private:
+    Ihm     ihm;
+    Plateau plateau;
+    bool    joueurActif;
 
-public:
-  JeuNewton();
-  ~JeuNewton();
+  public:
+    JeuNewton();
+    ~JeuNewton();
 
-  void setJoueurActif(bool joueurActif);
-  bool getJoueurActif() const;
-  void setJoueurs(const std::string joueurs[2]);
-  std::string getJoueur(unsigned int numero) const;
+    void setJoueurActif(bool joueurActif);
+    bool getJoueurActif() const;
 
-  void demarrer();
+    int demarrer();
 };
 
 #endif
