@@ -8,7 +8,7 @@ HEADERS := $(wildcard *.h)
 
 CFLAGS = -std=c++11 -Wall -I.
 CXX = g++ $(CFLAGS) -c
-LD = g++
+LD = g++ -o
 RM = rm -f
 
 all: $(TARGET)
