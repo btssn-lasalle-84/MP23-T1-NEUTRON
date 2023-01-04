@@ -1,14 +1,32 @@
-TARGET = 
+TARGET = neutron.out
+MAIN = main
+IHM = Ihm
+PLATEAU = Plateau
+JEUNEWTON = JeuNewton
 SOURCES := $(wildcard *.cpp)
 HEADERS := $(wildcard *.h)
 
 CFLAGS = -std=c++11 -Wall -I.
-CXX = g++ $(CFLAGS) -c 
-LD = g++
+CXX = g++ $(CFLAGS) -c
+LD = g++ -o
 RM = rm -f
 
-# TODO
+all: $(TARGET)
 
+$(TARGET): $(MAIN).o $(IHM).o $(PLATEAU).o $(JEUNEWTON).o
+	$(LD) $(TARGET) $^ $(CFLAGS)
+
+$(MAIN).o: $(MAIN).cpp
+	$(CXX) $^
+
+$(IHM).o: $(IHM).cpp
+	$(CXX) $^
+
+$(PLATEAU).o: $(PLATEAU).cpp
+	$(CXX) $^
+
+$(JEUNEWTON).o: $(JEUNEWTON).cpp
+	$(CXX) $^
 
 .PHONY: check cppcheck format clean cleanall
 
