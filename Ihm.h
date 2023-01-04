@@ -27,6 +27,10 @@ class Ihm
 
     void        afficherPlateau(const Plateau& plateau) const;
     void definirJoueurs(unsigned int numero);
+    unsigned int demandeUneDirection(bool joueurActif) const;
+    void feliciter(bool joueurActif);
+    void ecrireErreur(unsigned int erreur);
+    unsigned int selectionneUnPion(bool joueurActif);
 };
 
 #endif
