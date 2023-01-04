@@ -10,6 +10,7 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 
 #include <string>
+#include "Plateau.h"
 #ifndef IHM_H
 #define IHM_H
 #define NB_TIRETS      21
