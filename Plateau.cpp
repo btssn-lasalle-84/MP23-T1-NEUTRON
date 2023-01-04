@@ -58,6 +58,24 @@ bool Plateau::pionEstCoince(unsigned int i /*=NEUTRON_XY*/,
     return true;
 }
 
+bool Plateau::pionsSontCoinces(bool joueurActif) const
+{
+    for(size_t i = 0; i < NB_LIGNES; ++i)
+    {
+        for(size_t j = 0; j < NB_COLONNES; ++j)
+        {
+            if(damier[i][j] == int(joueurActif))
+            {
+                if(!pionEstCoince(i, j))
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
 int Plateau::deplaceUnPion(unsigned int direction,
                            unsigned int i /*=NEUTRON_XY*/,
                            unsigned int j /*=NEUTRON_XY*/,
