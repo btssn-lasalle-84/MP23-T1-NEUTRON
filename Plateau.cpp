@@ -11,22 +11,13 @@
 
 #include "Plateau.h"
 
-Plateau::Plateau() : coordonneesNeutron({ 3, 3 })
+Plateau::Plateau() :
+    coordonneesNeutron{ 3, 3 }, damier{ { 0, 0, 0, 0, 0 },
+                                        { -1, -1, -1, -1, -1 },
+                                        { -1, -1, 2, -1, -1 },
+                                        { -1, -1, -1, -1, -1 },
+                                        { 1, 1, 1, 1, 1 } }
 {
-    for(unsigned int i = 0; i < 5; ++i)
-    {
-        for(unsigned int j = 0; i < 5; ++i)
-        {
-            if(i == 0)
-                this->damier[i].push_back(0);
-            else if(i == 4)
-                this->damier[i].push_back(1);
-            else if(i == 3 && j == 3)
-                this->damier[i].push_back(2);
-            else
-                this->damier[i].push_back(-1);
-        }
-    }
 }
 
 Plateau::~Plateau()
@@ -77,27 +68,27 @@ int Plateau::deplaceUnPion(unsigned int direction,
         i = this->coordonneesNeutron[0];
         j = this->coordonneesNeutron[1];
     }
-    int ligne   = (1 - i / 4 - (i / 7) * (i / 4 % 2));
-    int colonne = (((i + 1) % 3 % 2 - i % 3 % 2));
+    int ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
+    int colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
 
-    if(this->damier[i][j] != pionValeur)
+    if(this->damier[i][j] != int(pionValeur))
         return 1;
     unsigned int directionValide = 0;
     while(this->damier[ligne][colonne] == -1)
     {
         if(!directionValide)
         {
-            directionValide == 1;
+            directionValide    = 1;
             this->damier[i][j] = -1;
         }
-        i       = ligne;
-        j       = colonne;
-        ligne   = (1 - i / 4 - (i / 7) * (i / 4 % 2));
-        colonne = (((j + 1) % 3 % 2 - j % 3 % 2));
+        i     = ligne;
+        j     = colonne;
+        ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
+        colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
     }
     if(directionValide)
     {
-        this->damier[i][j] = pionValeur;
+        this->damier[i][j] = int(pionValeur);
         if(pionValeur == 2)
             this->coordonneesNeutron[0] = i;
         this->coordonneesNeutron[1] = j;

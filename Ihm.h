@@ -26,7 +26,7 @@ class Ihm
     ~Ihm();
 
     void        afficherPlateau(const Plateau& plateau) const;
-    std::string definirJoueurs(unsigned int numero);
+    void definirJoueurs(unsigned int numero);
 };
 
 #endif

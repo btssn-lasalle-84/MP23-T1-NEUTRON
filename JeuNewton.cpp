@@ -66,7 +66,7 @@ int JeuNewton::demarrer()
         }
         else
             premierCoup = 0;
-        this->ihm.felicitater(joueurActif);
+        this->ihm.feliciter(joueurActif);
         this->joueurActif = (this->joueurActif + 1) % 2;
     }
     return 0;

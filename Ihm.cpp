@@ -39,7 +39,7 @@ void Ihm::afficherPlateau(const Plateau& plateau) const
     std::cout << std::endl;
 }
 
-std::string Ihm::definirJoueurs(unsigned int numero)
+void Ihm::definirJoueurs(unsigned int numero)
 {
     std::cout << "Saisir le nom du joueur numero " << numero << std::endl;
     std::cin >> this->joueurs[numero];
