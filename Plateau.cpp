@@ -110,8 +110,10 @@ int Plateau::deplaceUnPion(unsigned int direction,
     {
         this->damier[i][j] = int(pionValeur);
         if(pionValeur == 2)
+        {
             this->coordonneesNeutron[0] = i;
-        this->coordonneesNeutron[1] = j;
+            this->coordonneesNeutron[1] = j;
+        }
         return 0;
     }
     return 3;
