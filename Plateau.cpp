@@ -86,11 +86,13 @@ int Plateau::deplaceUnPion(unsigned int direction,
         i = this->coordonneesNeutron[0];
         j = this->coordonneesNeutron[1];
     }
-    int ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
-    int colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
 
     if(this->damier[i][j] != int(pionValeur))
         return 1;
+    if(this->pionEstCoince(i, j))
+        return 2;
+    int ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
+    int colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
     unsigned int directionValide = 0;
     while(this->damier[ligne][colonne] == -1)
     {
@@ -112,5 +114,5 @@ int Plateau::deplaceUnPion(unsigned int direction,
         this->coordonneesNeutron[1] = j;
         return 0;
     }
-    return 2;
+    return 3;
 }

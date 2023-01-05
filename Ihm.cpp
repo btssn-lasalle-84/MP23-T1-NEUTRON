@@ -70,11 +70,11 @@ void Ihm::ecrireErreur(unsigned int erreur)
         break;
 
     case 2:
-        std::cout << "Vous ne pouvez pas aller dans cette direction." << std::endl;
+        std::cout << "Ce pion ne peut pas être déplacé." << std::endl;
         break;
 
     case 3:
-        std::cout << "Ce pion ne peut pas être déplacé." << std::endl;
+        std::cout << "Vous ne pouvez pas aller dans cette direction." << std::endl;
         break;
 
     default:
