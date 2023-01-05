@@ -1,3 +1,4 @@
+DEBUG = oui
 TARGET = neutron.out
 MAIN = main
 IHM = Ihm
@@ -7,7 +8,12 @@ SOURCES := $(wildcard *.cpp)
 HEADERS := $(wildcard *.h)
 
 CFLAGS = -std=c++11 -Wall -I.
-CXX = g++ $(CFLAGS) -c
+ifeq ($(DEBUG),oui)
+	CXX = g++ $(CFLAGS) -c -DDEBUG
+else
+	CXX = g++ $(CFLAGS) -c
+endif
+DEBUG = g++ $(CFLAGS) -c -DDEBUG
 LD = g++ -o
 RM = rm -f
 

@@ -48,7 +48,9 @@ void Ihm::definirJoueurs(unsigned int numero)
 unsigned int Ihm::demandeUneDirection(bool joueurActif) const
 {
     unsigned int choixDirection;
-
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << this << std::endl;
+#endif
     std::cout << this->joueurs[joueurActif] << " doit saisir la direction: ";
     do
     {
@@ -63,6 +65,9 @@ unsigned int Ihm::demandeUneDirection(bool joueurActif) const
 
 void Ihm::ecrireErreur(unsigned int erreur)
 {
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << this << std::endl;
+#endif
     switch (erreur)
     {
     case 1:
@@ -84,6 +89,9 @@ void Ihm::ecrireErreur(unsigned int erreur)
 
 unsigned int Ihm::selectionneUnPion(bool joueurActif)
 {
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << this << std::endl;
+#endif
     unsigned int choixPion;
 
     std::cout << this->joueurs[joueurActif] << " doit choisir une direction: ";
@@ -100,5 +108,8 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
 
 void Ihm::feliciter(bool joueurActif)
 {
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << this << std::endl;
+#endif
     std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
 }
