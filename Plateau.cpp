@@ -51,9 +51,9 @@ bool Plateau::pionEstCoince(unsigned int i /*=NEUTRON_XY*/,
         j = this->coordonneesNeutron[1];
     }
     if((i + 1 < 5 && this->damier[i + 1][j] == -1) ||
-       (i - 1 > -1 && this->damier[i - 1][j] == -1) ||
+       (int(i) - 1 > -1 && this->damier[i - 1][j] == -1) ||
        (j + 1 < 5 && this->damier[i][j + 1] == -1) ||
-       (j - 1 > -1 && this->damier[j - 1][j] == -1))
+       (int(j) - 1 > -1 && this->damier[j - 1][j] == -1))
         return false;
     return true;
 }
