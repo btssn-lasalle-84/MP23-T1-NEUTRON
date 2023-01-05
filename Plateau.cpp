@@ -51,18 +51,18 @@ bool Plateau::pionEstCoince(unsigned int i /*=NEUTRON_XY*/,
         j = this->coordonneesNeutron[1];
     }
     if((i + 1 < 5 && this->damier[i + 1][j] == -1) ||
-       (i - 1 > -1 && this->damier[i - 1][j] == -1) ||
+       (int(i) - 1 > -1 && this->damier[i - 1][j] == -1) ||
        (j + 1 < 5 && this->damier[i][j + 1] == -1) ||
-       (j - 1 > -1 && this->damier[j - 1][j] == -1))
+       (int(j) - 1 > -1 && this->damier[j - 1][j] == -1))
         return false;
     return true;
 }
 
 bool Plateau::pionsSontCoinces(bool joueurActif) const
 {
-    for(size_t i = 0; i < NB_LIGNES; ++i)
+    for(unsigned int i = 0; i < NB_LIGNES; ++i)
     {
-        for(size_t j = 0; j < NB_COLONNES; ++j)
+        for(unsigned int j = 0; j < NB_COLONNES; ++j)
         {
             if(damier[i][j] == int(joueurActif))
             {
@@ -86,11 +86,13 @@ int Plateau::deplaceUnPion(unsigned int direction,
         i = this->coordonneesNeutron[0];
         j = this->coordonneesNeutron[1];
     }
-    int ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
-    int colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
 
     if(this->damier[i][j] != int(pionValeur))
         return 1;
+    if(this->pionEstCoince(i, j))
+        return 2;
+    int ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
+    int colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
     unsigned int directionValide = 0;
     while(this->damier[ligne][colonne] == -1)
     {
@@ -112,5 +114,5 @@ int Plateau::deplaceUnPion(unsigned int direction,
         this->coordonneesNeutron[1] = j;
         return 0;
     }
-    return 2;
+    return 3;
 }
