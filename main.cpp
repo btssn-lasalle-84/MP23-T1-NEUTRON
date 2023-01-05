@@ -14,5 +14,6 @@
 int main()
 {
     JeuNewton partie;
+    partie.demarrer();
     return 0;
 }
