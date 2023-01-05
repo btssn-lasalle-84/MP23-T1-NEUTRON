@@ -49,7 +49,7 @@ unsigned int Ihm::demandeUneDirection(bool joueurActif) const
 {
     unsigned int choixDirection;
 
-    std::cout << "Saisir la direction: ";
+    std::cout << this->joueurs[joueurActif] << " doit saisir la direction: ";
     do
     {
         std::cin >> choixDirection;

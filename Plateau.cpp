@@ -60,9 +60,9 @@ bool Plateau::pionEstCoince(unsigned int i /*=NEUTRON_XY*/,
 
 bool Plateau::pionsSontCoinces(bool joueurActif) const
 {
-    for(size_t i = 0; i < NB_LIGNES; ++i)
+    for(unsigned int i = 0; i < NB_LIGNES; ++i)
     {
-        for(size_t j = 0; j < NB_COLONNES; ++j)
+        for(unsigned int j = 0; j < NB_COLONNES; ++j)
         {
             if(damier[i][j] == int(joueurActif))
             {
