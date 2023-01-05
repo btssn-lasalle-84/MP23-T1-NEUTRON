@@ -35,24 +35,33 @@ int JeuNewton::demarrer()
 {
     bool premierCoup  = 1;
     bool partieGagnee = 0;
+    unsigned int direction = 5;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
     while(!partieGagnee)
     {
-        unsigned int entreeInvalide = 1;
+        unsigned int entreeInvalide = 0;
+        this->ihm.afficherPlateau(this->plateau);
         while(!entreeInvalide)
         {
-            entreeInvalide = this->plateau.deplaceUnPion(
-              this->ihm.demandeUneDirection(this->joueurActif));
+            direction = this->ihm.demandeUneDirection(this->joueurActif);
+            entreeInvalide = this->plateau.deplaceUnPion(direction);
             if(!entreeInvalide)
                 this->ihm.ecrireErreur(entreeInvalide);
         }
+        this->plateau.deplaceUnPion(direction);
         this->ihm.afficherPlateau(this->plateau);
         partieGagnee = this->plateau.pionEstCoince();
+#ifdef DEBUG
+    std::cout << partieGagnee << std::endl;
+#endif
         if(!premierCoup && !partieGagnee)
         {
-            entreeInvalide = 1;
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << this << std::endl;
+#endif
+            entreeInvalide = 0;
             while(!entreeInvalide)
             {
                 entreeInvalide = this->plateau.deplaceUnPion(
@@ -66,8 +75,8 @@ int JeuNewton::demarrer()
         }
         else
             premierCoup = 0;
-        this->ihm.feliciter(joueurActif);
         this->joueurActif = (this->joueurActif + 1) % 2;
     }
+    this->ihm.feliciter(joueurActif);
     return 0;
 }

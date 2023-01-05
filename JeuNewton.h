@@ -13,6 +13,7 @@
 #define JEU_NEWTON_H
 
 #include <string>
+#include <iostream>
 #include "Ihm.h"
 #include "Plateau.h"
 

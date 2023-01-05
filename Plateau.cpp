@@ -11,8 +11,12 @@
 
 #include "Plateau.h"
 
+#ifdef DEBUG
+#include <iostream>
+#endif
+
 Plateau::Plateau() :
-    coordonneesNeutron{ 3, 3 }, damier{ { 0, 0, 0, 0, 0 },
+    coordonneesNeutron{ 2, 2 }, damier{ { 0, 0, 0, 0, 0 },
                                         { 4, 4, 4, 4, 4 },
                                         { 4, 4, 2, 4, 4 },
                                         { 4, 4, 4, 4, 4 },
@@ -64,7 +68,7 @@ bool Plateau::pionsSontCoinces(bool joueurActif) const
     {
         for(unsigned int j = 0; j < NB_COLONNES; ++j)
         {
-            if(damier[i][j] == int(joueurActif))
+            if(damier[i][j] == (unsigned int)joueurActif)
             {
                 if(!pionEstCoince(i, j))
                 {
@@ -81,18 +85,36 @@ int Plateau::deplaceUnPion(unsigned int direction,
                            unsigned int j /*=NEUTRON_XY*/,
                            unsigned int pionValeur /*=2*/)
 {
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+#endif
     if(i == 5)
     {
         i = this->coordonneesNeutron[0];
         j = this->coordonneesNeutron[1];
     }
-
-    if(this->damier[i][j] != int(pionValeur))
+#ifdef DEBUG
+    std::cout << this->coordonneesNeutron[0] << this->coordonneesNeutron[1] << std::endl;
+#endif
+    if(this->damier[i][j] != pionValeur)
+    {
+#ifdef DEBUG
+    std::cout << "pion pas à moi" << this->damier[i][j] << pionValeur << std::endl;
+#endif
         return 1;
+    }
     if(this->pionEstCoince(i, j))
+    {
+#ifdef DEBUG
+    std::cout << "pion est coincé" << std::endl;
+#endif
         return 2;
+    }
     int ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
     int colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
+#ifdef DEBUG
+    std::cout << ligne << " " << colonne << std::endl;
+#endif
     unsigned int directionValide = 0;
     while(this->damier[ligne][colonne] == 4)
     {
@@ -108,7 +130,7 @@ int Plateau::deplaceUnPion(unsigned int direction,
     }
     if(directionValide)
     {
-        this->damier[i][j] = int(pionValeur);
+        this->damier[i][j] = pionValeur;
         if(pionValeur == 2)
         {
             this->coordonneesNeutron[0] = i;

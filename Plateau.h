@@ -21,7 +21,7 @@ class Plateau
 {
   private:
     unsigned int                   coordonneesNeutron[2];
-    std::vector<std::vector<int> > damier;
+    std::vector<std::vector<unsigned int> > damier;
 
   public:
     Plateau();
@@ -37,7 +37,7 @@ class Plateau
     int  deplaceUnPion(unsigned int direction,
                        unsigned int i           = NEUTRON_XY,
                        unsigned int j           = NEUTRON_XY,
-                       unsigned int joueurActif = 3);
+                       unsigned int joueurActif = 2);
 };
 
 #endif
