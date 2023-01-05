@@ -44,3 +44,61 @@ void Ihm::definirJoueurs(unsigned int numero)
     std::cout << "Saisir le nom du joueur numero " << numero << std::endl;
     std::cin >> this->joueurs[numero];
 }
+
+unsigned int Ihm::demandeUneDirection(bool joueurActif) const
+{
+    unsigned int choixDirection;
+
+    std::cout << "Saisir la direction: ";
+    do
+    {
+        std::cin >> choixDirection;
+        if(choixDirection == 5 || choixDirection == 0 || choixDirection > 9)
+        {
+            std::cout << "Choix invalide, resélectionnez une direction: ";
+        }
+    } while (choixDirection == 5 || choixDirection == 0 || choixDirection > 9);
+    return choixDirection;
+}
+
+void Ihm::ecrireErreur(unsigned int erreur)
+{
+    switch (erreur)
+    {
+    case 1:
+        std::cout << "Il n'y a pas un de vos pion sur la case." << std::endl;
+        break;
+
+    case 2:
+        std::cout << "Vous ne pouvez pas aller dans cette direction." << std::endl;
+        break;
+
+    case 3:
+        std::cout << "Ce pion ne peut pas être déplacé." << std::endl;
+        break;
+
+    default:
+        break;
+    }
+}
+
+unsigned int Ihm::selectionneUnPion(bool joueurActif)
+{
+    unsigned int choixPion;
+
+    std::cout << this->joueurs[joueurActif] << " doit choisir une direction: ";
+    do
+    {
+        std::cin >> choixPion;
+        if(choixPion >= LARGEUR_DAMIER && choixPion >= LARGEUR_DAMIER)
+        {
+            std::cout << "Entrée invalide, rentrer à nouveau votre direction: ";
+        }
+    } while (choixPion >= LARGEUR_DAMIER && choixPion >= LARGEUR_DAMIER);
+    return choixPion;
+}
+
+void Ihm::feliciter(bool joueurActif)
+{
+    std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
+}
