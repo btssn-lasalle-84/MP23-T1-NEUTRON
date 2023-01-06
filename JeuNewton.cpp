@@ -35,7 +35,7 @@ int JeuNewton::demarrer()
 {
     bool premierCoup  = 1;
     bool partieGagnee = 0;
-    unsigned int direction = 5;
+    unsigned int direction = DIRECTION_IMPOSSIBLE;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
@@ -47,8 +47,7 @@ int JeuNewton::demarrer()
         {
             direction = this->ihm.demandeUneDirection(this->joueurActif);
             entreeInvalide = this->plateau.deplaceUnPion(direction);
-            if(!entreeInvalide)
-                this->ihm.ecrireErreur(entreeInvalide);
+            this->ihm.ecrireErreur(entreeInvalide);
         }
         this->plateau.deplaceUnPion(direction);
         this->ihm.afficherPlateau(this->plateau);

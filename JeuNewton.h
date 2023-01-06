@@ -16,6 +16,7 @@
 #include <iostream>
 #include "Ihm.h"
 #include "Plateau.h"
+#define DIRECTION_IMPOSSIBLE 5
 
 class IHM;
 class Plateau;

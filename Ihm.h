@@ -15,6 +15,9 @@
 #define IHM_H
 #define NB_TIRETS      21
 #define LARGEUR_DAMIER 5
+#define ERREUR_CASE_INVALIDE 1
+#define ERREUR_PION_BLOQUE 2
+#define ERREUR_DIRECTION_INVALIDE 3
 
 class Ihm
 {

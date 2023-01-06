@@ -70,15 +70,15 @@ void Ihm::ecrireErreur(unsigned int erreur)
 #endif
     switch (erreur)
     {
-    case 1:
+    case ERREUR_CASE_INVALIDE:
         std::cout << "Il n'y a pas un de vos pion sur la case." << std::endl;
         break;
 
-    case 2:
+    case ERREUR_PION_BLOQUE:
         std::cout << "Ce pion ne peut pas être déplacé." << std::endl;
         break;
 
-    case 3:
+    case ERREUR_DIRECTION_INVALIDE:
         std::cout << "Vous ne pouvez pas aller dans cette direction." << std::endl;
         break;
 
