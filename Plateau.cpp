@@ -46,7 +46,6 @@ void Plateau::setCoordonneesNeutron(unsigned int i, unsigned int j)
 
 unsigned int Plateau::getCoordonneesNeutron() const
 {
-
     return (this->coordonneesNeutron[0] * 10 + this->coordonneesNeutron[1]);
 }
 
@@ -156,4 +155,25 @@ int Plateau::deplaceUnPion(unsigned int direction,
     std::cout << "Erreur direction invalide" << std::endl;
 #endif
     return ERREUR_DIRECTION_INVALIDE;
+}
+
+unsigned int Plateau::neutronDansCamp() const
+{
+    for(unsigned int j = 0; j < NB_COLONNES; ++j)
+    {
+        if(damier[PREMIERE_LIGNES][j] == NEUTRON)
+        {
+            return NEUTRON_CAMP_JOUEUR_0;
+        }
+    }
+
+    for(size_t j = 0; j < NB_COLONNES; ++j)
+    {
+        if(damier[DERNIERE_LIGNE][j] == NEUTRON)
+        {
+            return NEUTRON_CAMP_JOUEUR_1;
+        }
+    }
+
+    return AUCUN_CAMP;
 }
