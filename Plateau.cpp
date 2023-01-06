@@ -16,11 +16,21 @@
 #endif
 
 Plateau::Plateau() :
-    coordonneesNeutron{ 2, 2 }, damier{ { PION_JOUEUR_0, PION_JOUEUR_0, PION_JOUEUR_0, PION_JOUEUR_0, PION_JOUEUR_0},
-                                        { CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE },
-                                        { CASE_VIDE, CASE_VIDE, NEUTRON, CASE_VIDE, CASE_VIDE },
-                                        { CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE },
-                                        { PION_JOUEUR_1, PION_JOUEUR_1, PION_JOUEUR_1, PION_JOUEUR_1, PION_JOUEUR_1 } }
+    coordonneesNeutron{ 2, 2 }, damier{
+        { PION_JOUEUR_0,
+          PION_JOUEUR_0,
+          PION_JOUEUR_0,
+          PION_JOUEUR_0,
+          PION_JOUEUR_0 },
+        { CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE },
+        { CASE_VIDE, CASE_VIDE, NEUTRON, CASE_VIDE, CASE_VIDE },
+        { CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE, CASE_VIDE },
+        { PION_JOUEUR_1,
+          PION_JOUEUR_1,
+          PION_JOUEUR_1,
+          PION_JOUEUR_1,
+          PION_JOUEUR_1 }
+    }
 {
 }
 
@@ -94,19 +104,21 @@ int Plateau::deplaceUnPion(unsigned int direction,
         j = this->coordonneesNeutron[1];
     }
 #ifdef DEBUG
-    std::cout << this->coordonneesNeutron[0] << this->coordonneesNeutron[1] << std::endl;
+    std::cout << this->coordonneesNeutron[0] << this->coordonneesNeutron[1]
+              << std::endl;
 #endif
     if(this->damier[i][j] != pionValeur)
     {
 #ifdef DEBUG
-    std::cout << "pion pas à moi" << this->damier[i][j] << pionValeur << std::endl;
+        std::cout << "pion pas à moi" << this->damier[i][j] << pionValeur
+                  << std::endl;
 #endif
         return ERREUR_CASE_INVALIDE;
     }
     if(this->pionEstCoince(i, j))
     {
 #ifdef DEBUG
-    std::cout << "pion est coincé" << std::endl;
+        std::cout << "pion est coincé" << std::endl;
 #endif
         return ERREUR_PION_BLOQUE;
     }
@@ -121,7 +133,7 @@ int Plateau::deplaceUnPion(unsigned int direction,
         if(!directionValide)
         {
 #ifdef DEBUG
-    std::cout << "Si direction invalide" << std::endl;
+            std::cout << "Si direction invalide" << std::endl;
 #endif
             ++directionValide;
             this->damier[i][j] = CASE_VIDE;
