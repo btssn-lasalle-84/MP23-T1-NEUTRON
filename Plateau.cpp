@@ -44,11 +44,10 @@ void Plateau::setCoordonneesNeutron(unsigned int i, unsigned int j)
     this->coordonneesNeutron[1] = j;
 }
 
-std::vector<unsigned int> Plateau::getCoordonneesNeutron() const
+unsigned int Plateau::getCoordonneesNeutron() const
 {
-    std::vector<unsigned int> coordonnees = { this->coordonneesNeutron[0],
-                                              this->coordonneesNeutron[1] };
-    return (coordonnees);
+
+    return (this->coordonneesNeutron[0] * 10 + this->coordonneesNeutron[1]);
 }
 
 unsigned int Plateau::getContenuCase(unsigned int i, unsigned int j) const

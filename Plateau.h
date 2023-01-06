@@ -35,7 +35,7 @@ class Plateau
     ~Plateau();
 
     void setCoordonneesNeutron(unsigned int i, unsigned int j);
-    std::vector<unsigned int> getCoordonneesNeutron() const;
+    unsigned int getCoordonneesNeutron() const;
     unsigned int getContenuCase(unsigned int i, unsigned int j) const;
 
     bool pionEstCoince(unsigned int i = NEUTRON_XY,

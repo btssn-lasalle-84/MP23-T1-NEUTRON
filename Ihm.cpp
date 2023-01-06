@@ -59,7 +59,7 @@ unsigned int Ihm::demandeUneDirection(bool joueurActif) const
         {
             std::cout << "Choix invalide, resélectionnez une direction: ";
         }
-    } while(choixDirection == 5 || choixDirection == 0 || choixDirection > 9);
+    } while (choixDirection == 5 || choixDirection == 0 || choixDirection > 9);
     return choixDirection;
 }
 
@@ -68,24 +68,22 @@ void Ihm::ecrireErreur(unsigned int erreur)
 #ifdef DEBUG
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
-    switch(erreur)
+    switch (erreur)
     {
-        case ERREUR_CASE_INVALIDE:
-            std::cout << "Il n'y a pas un de vos pion sur la case."
-                      << std::endl;
-            break;
+    case ERREUR_CASE_INVALIDE:
+        std::cerr << "Il n'y a pas un de vos pion sur la case." << std::endl;
+        break;
 
-        case ERREUR_PION_BLOQUE:
-            std::cout << "Ce pion ne peut pas être déplacé." << std::endl;
-            break;
+    case ERREUR_PION_BLOQUE:
+        std::cerr << "Ce pion ne peut pas être déplacé." << std::endl;
+        break;
 
-        case ERREUR_DIRECTION_INVALIDE:
-            std::cout << "Vous ne pouvez pas aller dans cette direction."
-                      << std::endl;
-            break;
+    case ERREUR_DIRECTION_INVALIDE:
+        std::cerr << "Vous ne pouvez pas aller dans cette direction." << std::endl;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 }
 
@@ -104,7 +102,7 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
         {
             std::cout << "Entrée invalide, rentrer à nouveau votre direction: ";
         }
-    } while(choixPion >= LARGEUR_DAMIER && choixPion >= LARGEUR_DAMIER);
+    } while ((choixPion / 10) >= LARGEUR_DAMIER || (choixPion % 10) >= LARGEUR_DAMIER);
     return choixPion;
 }
 
