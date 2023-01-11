@@ -178,7 +178,7 @@ unsigned int Plateau::neutronEstDansCamp() const
         }
     }
 
-    for(size_t j = 0; j < NB_COLONNES; ++j)
+    for(unsigned int j = 0; j < NB_COLONNES; ++j)
     {
         if(damier[DERNIERE_LIGNE][j] == NEUTRON)
         {
