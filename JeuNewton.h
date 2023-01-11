@@ -16,8 +16,8 @@
 #include <iostream>
 #include "Ihm.h"
 #include "Plateau.h"
-#define CASE_NEUTRE 2
-#define NEUTRON_XY  5
+#define CASE_NEUTRE          2
+#define NEUTRON_XY           5
 #define ERREUR_CASE_INVALIDE 1
 
 class IHM;

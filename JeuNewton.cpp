@@ -31,7 +31,7 @@ bool JeuNewton::getJoueurActif() const
 
 int JeuNewton::demarrer()
 {
-    bool premierCoup  = 1;
+    bool premierCoup = 1;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
@@ -53,15 +53,16 @@ int JeuNewton::demarrer()
         if(this->plateau.pionsSontCoinces(joueurActif))
         {
 #ifdef DEBUG
-std::cout << "Les pions du joueur " << joueurActif << "sont coincés" << std::endl;
+            std::cout << "Les pions du joueur " << joueurActif << "sont coincés"
+                      << std::endl;
 #endif
             this->ihm.feliciter((joueurActif + 1) % 2);
             return 0;
         }
-        if(! premierCoup)
+        if(!premierCoup)
             this->jouerUnCoup(0);
-        this->joueurActif = (this->joueurActif + 1 ) % 2;
-        premierCoup = 0;
+        this->joueurActif = (this->joueurActif + 1) % 2;
+        premierCoup       = 0;
     }
 }
 
@@ -69,7 +70,7 @@ void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
 {
     unsigned int direction;
     unsigned int erreur;
-    bool directionInvalide = 1, pionNonSelectionne = 1;
+    bool         directionInvalide = 1, pionNonSelectionne = 1;
     unsigned int pionValeur, caseSelectionne;
     unsigned int i, j;
 #ifdef DEBUG
@@ -80,34 +81,33 @@ void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
         if(estNeutron)
         {
             caseSelectionne = this->plateau.getCoordonneesNeutron();
-            i = caseSelectionne / 10;
-            j = caseSelectionne % 10;
-            pionValeur = NEUTRON;
+            i               = caseSelectionne / 10;
+            j               = caseSelectionne % 10;
+            pionValeur      = NEUTRON;
         }
         else if(pionNonSelectionne)
         {
-            pionValeur = (unsigned int)this->joueurActif;
+            pionValeur      = (unsigned int)this->joueurActif;
             caseSelectionne = this->ihm.selectionneUnPion(joueurActif);
-            while (this->plateau.pionEstCoince(i, j))
+            while(this->plateau.pionEstCoince(i, j))
             {
                 this->ihm.ecrireErreur(ERREUR_CASE_INVALIDE);
                 caseSelectionne = this->ihm.selectionneUnPion(joueurActif);
             }
             pionNonSelectionne = 0;
-            i = caseSelectionne / 10;
-            j = caseSelectionne % 10;
+            i                  = caseSelectionne / 10;
+            j                  = caseSelectionne % 10;
         }
         direction = this->ihm.demandeUneDirection(this->joueurActif);
-        erreur = this->plateau.deplaceUnPion(direction, i, j, pionValeur);
-        if(! erreur)
+        erreur    = this->plateau.deplaceUnPion(direction, i, j, pionValeur);
+        if(!erreur)
             directionInvalide = 0;
         else
         {
             this->ihm.ecrireErreur(erreur);
-            if(! estNeutron)
+            if(!estNeutron)
                 pionNonSelectionne = 1;
         }
     }
     this->ihm.afficherPlateau(this->plateau);
 }
-
