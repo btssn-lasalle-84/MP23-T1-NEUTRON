@@ -15,5 +15,8 @@ int main()
 {
     JeuNewton partie;
     partie.demarrer();
+#ifdef DEBUG
+    std::cout << "Partie Finie" << std::endl;
+#endif
     return 0;
 }

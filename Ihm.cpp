@@ -31,7 +31,12 @@ void Ihm::afficherPlateau(const Plateau& plateau) const
             std::cout << "|   ";
         std::cout << "|" << std::endl;
         for(unsigned int j = 0; j < LARGEUR_DAMIER; ++j)
-            std::cout << "| " << plateau.getContenuCase(i, j) << " ";
+        {
+            if(plateau.getContenuCase(i,j) == CASE_VIDE)
+                std::cout << "|   ";
+            else
+                std::cout << "| " << plateau.getContenuCase(i, j) << " ";
+        }
         std::cout << "|" << std::endl;
     }
     for(unsigned int colonne = 0; colonne < NB_TIRETS; ++colonne)
@@ -94,15 +99,15 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
 #endif
     unsigned int choixPion;
 
-    std::cout << this->joueurs[joueurActif] << " doit choisir une direction: ";
+    std::cout << this->joueurs[joueurActif] << " doit choisir un pion: ";
     do
     {
         std::cin >> choixPion;
-        if(choixPion >= LARGEUR_DAMIER && choixPion >= LARGEUR_DAMIER)
+        if(choixPion / 10 >= LARGEUR_DAMIER && choixPion % 10 >= LARGEUR_DAMIER)
         {
-            std::cout << "Entrée invalide, rentrer à nouveau votre direction: ";
+            std::cout << "Entrée invalide, rentrer à nouveau un pion: ";
         }
-    } while ((choixPion / 10) >= LARGEUR_DAMIER || (choixPion % 10) >= LARGEUR_DAMIER);
+    } while (choixPion / 10 >= LARGEUR_DAMIER || choixPion % 10 >= LARGEUR_DAMIER);
     return choixPion;
 }
 

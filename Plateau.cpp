@@ -62,8 +62,12 @@ bool Plateau::pionEstCoince(unsigned int i /*=NEUTRON_XY*/,
         i = this->coordonneesNeutron[0];
         j = this->coordonneesNeutron[1];
     }
-    if((i + 1 < 5 && this->damier[i + 1][j] == CASE_VIDE) ||
-       (int(i) - 1 > -1 && this->damier[i - 1][j] == CASE_VIDE) ||
+    if((i + 1 < 5 && (this->damier[i + 1][j] == CASE_VIDE ||
+                      (j + 1 < 5 && this->damier[i + 1][j + 1]) ||
+                      (int(j) - 1 > -1 && this->damier[i + 1][j - 1]))) ||
+       (int(i) - 1 > -1 && (this->damier[i - 1][j] == CASE_VIDE ||
+                            (j + 1 < 5 && this->damier[i - 1][j + 1]) ||
+                            (int(j) - 1 > -1 && this->damier[i - 1][j - 1]))) ||
        (j + 1 < 5 && this->damier[i][j + 1] == CASE_VIDE) ||
        (int(j) - 1 > -1 && this->damier[j - 1][j] == CASE_VIDE))
         return false;
@@ -126,21 +130,28 @@ int Plateau::deplaceUnPion(unsigned int direction,
     std::cout << ligne << " " << colonne << std::endl;
 #endif
     unsigned int directionValide = 0;
-    while(this->damier[ligne][colonne] == CASE_VIDE)
+    while(((ligne < 5 && ligne >= 0) && (colonne < 5 && colonne >= 0)) &&
+          this->damier[ligne][colonne] == CASE_VIDE)
     {
         if(!directionValide)
         {
 #ifdef DEBUG
             std::cout << "Si direction invalide" << std::endl;
 #endif
-            ++directionValide;
+            directionValide    = 1;
             this->damier[i][j] = CASE_VIDE;
+#ifdef DEBUG
+            std::cout << "00 Pas le problème" << std::endl;
+#endif
         }
         i     = ligne;
         j     = colonne;
         ligne = i + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
         colonne = j + (((direction + 1) % 3 % 2 - direction % 3 % 2));
     }
+#ifdef DEBUG
+    std::cout << "directionValide " << directionValide << std::endl;
+#endif
     if(directionValide)
     {
         this->damier[i][j] = pionValeur;

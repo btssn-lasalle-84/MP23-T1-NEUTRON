@@ -34,34 +34,36 @@ bool JeuNewton::getJoueurActif() const
 int JeuNewton::demarrer()
 {
     bool premierCoup  = 1;
-    bool partieGagnee = 0;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
-    while(!partieGagnee)
+    while(true)
     {
         if(this->plateau.pionEstCoince())
         {
-            partieGagnee = 1;
             this->ihm.feliciter((joueurActif + 1) % 2);
+            return 0;
         }
         this->jouerUnCoup(1);
         int campNeutron = this->plateau.neutronDansCamp();
-        if(campNeutron == CASE_NEUTRE)
+        if(campNeutron != CASE_NEUTRE)
         {
-            partieGagnee = 1;
             this->ihm.feliciter(campNeutron);
+            return 0;
         }
         if(this->plateau.pionsSontCoinces(joueurActif))
         {
-            partieGagnee = 1;
+#ifdef DEBUG
+std::cout << "Les pions du joueur " << joueurActif << "sont coincés" << std::endl;
+#endif
             this->ihm.feliciter((joueurActif + 1) % 2);
+            return 0;
         }
         if(! premierCoup)
             this->jouerUnCoup(0);
+        this->joueurActif = (this->joueurActif + 1 ) % 2;
         premierCoup = 0;
     }
-    return 0;
 }
 
 void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
@@ -71,7 +73,9 @@ void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
     bool directionInvalide = 1, pionNonSelectionne = 1;
     unsigned int pionValeur, caseSelectionne;
     unsigned int i, j;
-
+#ifdef DEBUG
+    std::cout << "estNeutron" << estNeutron << std::endl;
+#endif
     while(directionInvalide)
     {
         if(estNeutron)
@@ -99,7 +103,11 @@ void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
         if(! erreur)
             directionInvalide = 0;
         else
+        {
             this->ihm.ecrireErreur(erreur);
+            if(! estNeutron)
+                pionNonSelectionne = 1;
+        }
     }
     this->ihm.afficherPlateau(this->plateau);
 }
