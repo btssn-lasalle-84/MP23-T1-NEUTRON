@@ -17,8 +17,6 @@ JeuNewton::JeuNewton() : joueurActif(0)
 
 JeuNewton::~JeuNewton()
 {
-    delete &this->ihm;
-    delete &this->plateau;
 }
 
 void JeuNewton::setJoueurActif(bool joueurActif)
@@ -37,6 +35,7 @@ int JeuNewton::demarrer()
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
+    this->ihm.afficherPlateau(this->plateau);
     while(true)
     {
         if(this->plateau.pionEstCoince())
@@ -45,7 +44,7 @@ int JeuNewton::demarrer()
             return 0;
         }
         this->jouerUnCoup(1);
-        int campNeutron = this->plateau.neutronDansCamp();
+        int campNeutron = this->plateau.neutronEstDansCamp();
         if(campNeutron != CASE_NEUTRE)
         {
             this->ihm.feliciter(campNeutron);

@@ -168,7 +168,7 @@ int Plateau::deplaceUnPion(unsigned int direction,
     return ERREUR_DIRECTION_INVALIDE;
 }
 
-unsigned int Plateau::neutronDansCamp() const
+unsigned int Plateau::neutronEstDansCamp() const
 {
     for(unsigned int j = 0; j < NB_COLONNES; ++j)
     {

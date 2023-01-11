@@ -1,4 +1,4 @@
-DEBUG = oui
+DEBUG = non
 TARGET = neutron.out
 MAIN = main
 IHM = Ihm

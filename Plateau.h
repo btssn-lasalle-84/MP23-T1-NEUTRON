@@ -50,7 +50,7 @@ class Plateau
                                unsigned int i           = NEUTRON_XY,
                                unsigned int j           = NEUTRON_XY,
                                unsigned int joueurActif = NEUTRON);
-    unsigned int neutronDansCamp() const;
+    unsigned int neutronEstDansCamp() const;
 };
 
 #endif
