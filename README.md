@@ -2,6 +2,8 @@
 
 # MP23-T1 Neutron
 
-## Présentation {Les joueurs se font face devant un damier 5x5. Au départ, chaque joueur dispose ses 5 pions (5 pions rouges et 5 pions bleus) sur la première rangée face à lui. Le pion neutre de couleur verte, appelé neutron, est placé dans la case centrale. Le but du jeu est d’amener le neutron dans son propre camp.}
+## Présentation
 
-## Recette {}
+Les joueurs se font face devant un damier 5x5. Au départ, chaque joueur dispose ses 5 pions (5 pions rouges et 5 pions bleus) sur la première rangée face à lui. Le pion neutre de couleur verte, appelé neutron, est placé dans la case centrale. Le but du jeu est d’amener le neutron dans son propre camp.
+
+## Recette
