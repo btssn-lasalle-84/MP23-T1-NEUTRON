@@ -13,8 +13,11 @@
 #include "Plateau.h"
 #ifndef IHM_H
 #define IHM_H
-#define NB_TIRETS      21
-#define LARGEUR_DAMIER 5
+#define NB_TIRETS                 21
+#define LARGEUR_DAMIER            5
+#define ERREUR_CASE_INVALIDE      1
+#define ERREUR_PION_BLOQUE        2
+#define ERREUR_DIRECTION_INVALIDE 3
 
 class Ihm
 {
@@ -25,12 +28,12 @@ class Ihm
     Ihm();
     ~Ihm();
 
-    void        afficherPlateau(const Plateau& plateau) const;
-    void definirJoueurs(unsigned int numero);
+    void         afficherPlateau(const Plateau& plateau) const;
+    void         definirJoueurs(unsigned int numero);
     unsigned int demandeUneDirection(bool joueurActif) const;
-    void ecrireErreur(unsigned int erreur);
+    void         ecrireErreur(unsigned int erreur);
     unsigned int selectionneUnPion(bool joueurActif);
-    void feliciter(bool joueurActif);
+    void         feliciter(bool joueurActif);
 };
 
 #endif
