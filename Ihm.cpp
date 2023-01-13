@@ -114,6 +114,18 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
     return choixPion;
 }
 
+unsigned int afficherMenu()
+{
+    unsigned int choix;
+
+    std::cout << "Selection du mode de jeu: \n"
+              << "1: Lancer une partie\n"
+              << "2: Afficher l'historique\n"
+              << "Entrez votre choix: ";
+    std::cin >> choix;
+    return choix;
+}
+
 void Ihm::feliciter(bool joueurActif)
 {
 #ifdef DEBUG
