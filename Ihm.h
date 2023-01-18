@@ -38,6 +38,8 @@ class Ihm
     unsigned int afficherMenu();
     void         afficherRegles();
     unsigned int afficherChoixModeDeJeu();
+    unsigned int choisirPremierJoueur();
+    void         effacerEcran();
     void         feliciter(bool joueurActif);
 };
 

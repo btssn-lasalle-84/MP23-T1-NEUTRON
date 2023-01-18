@@ -192,6 +192,23 @@ unsigned int Ihm::afficherChoixModeDeJeu()
     return choix;
 }
 
+unsigned int Ihm::choisirPremierJoueur()
+{
+    unsigned int choix = 0;
+
+    while(choix != 1 && choix != 2)
+    {
+        std::cout << "Veuillez choisir le joueur qui commence : ";
+        std::cin >> choix;
+    }
+    return choix;
+}
+
+void Ihm::effacerEcran()
+{
+    std::cout << "\033[H\033[2J";
+}
+
 void Ihm::feliciter(bool joueurActif)
 {
 #ifdef DEBUG
