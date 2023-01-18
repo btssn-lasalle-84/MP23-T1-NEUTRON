@@ -146,7 +146,9 @@ void Ihm::afficherRegles()
          "rencontrent un obstacle : le bord du tablier ou un autre pion, pour "
          "séléctionner son pions, il faut mettre en premier le numéro de la "
          "ligne (la première ligne correspond a 0), et à la suite celui de la "
-         "colonne (la première colonne correspond à 0)."
+         "colonne (la première colonne correspond à 0), donc, par exemple, "
+         "pour un pion qui est sur la première ligne et la 3ème colonne, il "
+         "faudrais mettre 02."
       << std::endl;
     std::cout << "Le joueur qui commence la partie ne déplace pas le neutron "
                  "au premier tour. Il déplace simplement une de ses pièces."
