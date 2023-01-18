@@ -11,6 +11,9 @@
 
 #ifndef PLATEAU_H
 #define PLATEAU_H
+
+#include <vector>
+
 #define NEUTRON_XY                5
 #define NB_LIGNES                 5
 #define NB_COLONNES               5
@@ -21,13 +24,12 @@
 #define NEUTRON_CAMP_JOUEUR_0     0
 #define NEUTRON_CAMP_JOUEUR_1     1
 #define AUCUN_CAMP                2
-#define PREMIERE_LIGNES           0
+#define PREMIERE_LIGNE            0
 #define DERNIERE_LIGNE            4
 #define ERREUR_CASE_INVALIDE      1
 #define ERREUR_PION_BLOQUE        2
 #define ERREUR_DIRECTION_INVALIDE 3
-
-#include <vector>
+#define BASE                      10
 
 class Plateau
 {
@@ -39,16 +41,16 @@ class Plateau
     Plateau();
     ~Plateau();
 
-    void         setCoordonneesNeutron(unsigned int i, unsigned int j);
+    void setCoordonneesNeutron(unsigned int ligne, unsigned int colonne);
     unsigned int getCoordonneesNeutron() const;
-    unsigned int getContenuCase(unsigned int i, unsigned int j) const;
+    unsigned int getContenuCase(unsigned int ligne, unsigned int colonne) const;
 
-    bool         pionEstCoince(unsigned int i = NEUTRON_XY,
-                               unsigned int j = NEUTRON_XY) const;
+    bool         pionEstCoince(unsigned int ligne   = NEUTRON_XY,
+                               unsigned int colonne = NEUTRON_XY) const;
     bool         pionsSontCoinces(bool joueurActif) const;
     int          deplaceUnPion(unsigned int direction,
-                               unsigned int i           = NEUTRON_XY,
-                               unsigned int j           = NEUTRON_XY,
+                               unsigned int ligne       = NEUTRON_XY,
+                               unsigned int colonne     = NEUTRON_XY,
                                unsigned int joueurActif = NEUTRON);
     unsigned int neutronEstDansCamp() const;
 };

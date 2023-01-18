@@ -22,20 +22,21 @@ Ihm::~Ihm()
 
 void Ihm::afficherPlateau(const Plateau& plateau) const
 {
-    for(unsigned int i = 0; i < LARGEUR_DAMIER; ++i)
+    for(unsigned int ligne = 0; ligne < LARGEUR_DAMIER; ++ligne)
     {
         for(unsigned int indiceCase = 0; indiceCase < NB_TIRETS; ++indiceCase)
             std::cout << "_";
         std::cout << std::endl;
-        for(unsigned int j = 0; j < LARGEUR_DAMIER; ++j)
+        for(unsigned int colonne = 0; colonne < LARGEUR_DAMIER; ++colonne)
             std::cout << "|   ";
         std::cout << "|" << std::endl;
-        for(unsigned int j = 0; j < LARGEUR_DAMIER; ++j)
+        for(unsigned int colonne = 0; colonne < LARGEUR_DAMIER; ++colonne)
         {
-            if(plateau.getContenuCase(i, j) == CASE_VIDE)
+            if(plateau.getContenuCase(ligne, colonne) == CASE_VIDE)
                 std::cout << "|   ";
             else
-                std::cout << "| " << plateau.getContenuCase(i, j) << " ";
+                std::cout << "| " << plateau.getContenuCase(ligne, colonne)
+                          << " ";
         }
         std::cout << "|" << std::endl;
     }
@@ -46,7 +47,12 @@ void Ihm::afficherPlateau(const Plateau& plateau) const
 
 void Ihm::definirJoueurs(unsigned int numero)
 {
-    std::cout << "Saisir le nom du joueur numero " << numero << std::endl;
+    std::cout << "Saisir le nom du ";
+    if(numero == 1)
+        std::cout << "second";
+    else if(numero == 0)
+        std::cout << "premier";
+    std::cout << " joueur : ";
     std::cin >> this->joueurs[numero];
 }
 
@@ -56,13 +62,13 @@ unsigned int Ihm::demandeUneDirection(bool joueurActif) const
 #ifdef DEBUG
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
-    std::cout << this->joueurs[joueurActif] << " doit saisir la direction: ";
+    std::cout << this->joueurs[joueurActif] << " doit saisir la direction : ";
     do
     {
         std::cin >> choixDirection;
         if(choixDirection == 5 || choixDirection == 0 || choixDirection > 9)
         {
-            std::cout << "Choix invalide, resélectionnez une direction: ";
+            std::cout << "Choix invalide, resélectionnez une direction : ";
         }
     } while(choixDirection == 5 || choixDirection == 0 || choixDirection > 9);
     return choixDirection;
@@ -101,16 +107,17 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
 #endif
     unsigned int choixPion;
 
-    std::cout << this->joueurs[joueurActif] << " doit choisir un pion: ";
+    std::cout << this->joueurs[joueurActif] << " doit choisir un pion : ";
     do
     {
         std::cin >> choixPion;
-        if(choixPion / 10 >= LARGEUR_DAMIER && choixPion % 10 >= LARGEUR_DAMIER)
+        if(choixPion / BASE >= LARGEUR_DAMIER &&
+           choixPion % BASE >= LARGEUR_DAMIER)
         {
-            std::cout << "Entrée invalide, rentrer à nouveau un pion: ";
+            std::cout << "Entrée invalide, rentrer à nouveau un pion : ";
         }
-    } while(choixPion / 10 >= LARGEUR_DAMIER ||
-            choixPion % 10 >= LARGEUR_DAMIER);
+    } while(choixPion / BASE >= LARGEUR_DAMIER ||
+            choixPion % BASE >= LARGEUR_DAMIER);
     return choixPion;
 }
 
@@ -120,4 +127,9 @@ void Ihm::feliciter(bool joueurActif)
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
     std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
+}
+
+void Ihm::afficherVersion()
+{
+    std::cout << "Jeu Neutron 1.1" << std::endl;
 }
