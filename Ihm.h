@@ -35,11 +35,11 @@ class Ihm
     unsigned int demandeUneDirection(bool joueurActif) const;
     void         ecrireErreur(unsigned int erreur);
     unsigned int selectionneUnPion(bool joueurActif);
-    unsigned int afficherMenu();
-    void         afficherRegles();
-    unsigned int afficherChoixModeDeJeu();
-    unsigned int choisirPremierJoueur();
-    void         effacerEcran();
+    unsigned int afficherMenu() const;
+    void         afficherRegles() const;
+    unsigned int afficherChoixModeDeJeu() const;
+    unsigned int choisirPremierJoueur() const;
+    void         effacerEcran() const;
     void         feliciter(bool joueurActif);
 };
 

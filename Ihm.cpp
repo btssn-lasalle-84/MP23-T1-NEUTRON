@@ -114,7 +114,7 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
     return choixPion;
 }
 
-unsigned int Ihm::afficherMenu()
+unsigned int Ihm::afficherMenu() const
 {
     unsigned int choix = 0;
 
@@ -130,7 +130,7 @@ unsigned int Ihm::afficherMenu()
     return choix;
 }
 
-void Ihm::afficherRegles()
+void Ihm::afficherRegles() const
 {
     std::cout
       << "Les joueurs se font face devant un damier 5x5. Au départ, chaque "
@@ -177,7 +177,7 @@ void Ihm::afficherRegles()
       << std::endl;
 }
 
-unsigned int Ihm::afficherChoixModeDeJeu()
+unsigned int Ihm::afficherChoixModeDeJeu() const
 {
     unsigned int choix = 0;
 
@@ -192,7 +192,7 @@ unsigned int Ihm::afficherChoixModeDeJeu()
     return choix;
 }
 
-unsigned int Ihm::choisirPremierJoueur()
+unsigned int Ihm::choisirPremierJoueur() const
 {
     unsigned int choix = 0;
 
@@ -204,7 +204,7 @@ unsigned int Ihm::choisirPremierJoueur()
     return choix;
 }
 
-void Ihm::effacerEcran()
+void Ihm::effacerEcran() const
 {
     std::cout << "\033[H\033[2J";
 }
