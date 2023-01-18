@@ -34,6 +34,7 @@ class Ihm
     void         ecrireErreur(unsigned int erreur);
     unsigned int selectionneUnPion(bool joueurActif);
     unsigned int afficherMenu();
+    void         afficherRegles();
     void         feliciter(bool joueurActif);
 };
 
