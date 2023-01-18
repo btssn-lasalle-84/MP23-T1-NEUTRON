@@ -18,6 +18,8 @@
 #define ERREUR_CASE_INVALIDE      1
 #define ERREUR_PION_BLOQUE        2
 #define ERREUR_DIRECTION_INVALIDE 3
+#define NB_CHOIX_MENU             5
+#define NB_CHOIX_MODE_DE_JEU      2
 
 class Ihm
 {
@@ -35,6 +37,7 @@ class Ihm
     unsigned int selectionneUnPion(bool joueurActif);
     unsigned int afficherMenu();
     void         afficherRegles();
+    unsigned int afficherChoixModeDeJeu();
     void         feliciter(bool joueurActif);
 };
 

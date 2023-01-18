@@ -116,14 +116,17 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
 
 unsigned int Ihm::afficherMenu()
 {
-    unsigned int choix;
+    unsigned int choix = 0;
 
     std::cout << "1 : Lancer une partie\n"
               << "2 : Afficher l'historique\n"
               << "3 : Afficher les règles du jeu\n"
-              << "5 : Fermer le jeu\n"
-              << "Entrez votre choix : ";
-    std::cin >> choix;
+              << "5 : Fermer le jeu\n";
+    while(choix == 0 || choix < NB_CHOIX_MENU)
+    {
+        std::cout << "Entrez votre choix : ";
+        std::cin >> choix;
+    }
     return choix;
 }
 
@@ -170,6 +173,21 @@ void Ihm::afficherRegles()
       << "    - que toutes les cases de l’adversaire soient occupées par cinq "
          "de ses pions ou par quatre de ses pions et le neutron.)"
       << std::endl;
+}
+
+unsigned int Ihm::afficherChoixModeDeJeu()
+{
+    unsigned int choix = 0;
+
+    std::cout << "1 : un joueur\n"
+              << "2 : deux joueurs\n";
+
+    while(choix == 0 || choix < NB_CHOIX_MENU)
+    {
+        std::cout << "Entrez votre choix : ";
+        std::cin >> choix;
+    }
+    return choix;
 }
 
 void Ihm::feliciter(bool joueurActif)
