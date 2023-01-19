@@ -43,7 +43,7 @@ class JeuNeutron
     void setJoueurActif(bool joueurActif);
     bool getJoueurActif() const;
 
-    void jouerUnCoup(bool estNeutron = 1);
+    void jouerUnCoup(bool estNeutron = true);
     int  demarrer();
     int  jouerPartieUnJoueur();
 };

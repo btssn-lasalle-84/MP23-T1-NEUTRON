@@ -21,6 +21,9 @@
 #define ERREUR_PION_BLOQUE        2
 #define ERREUR_DIRECTION_INVALIDE 3
 #define BASE                      10
+#define DIRECTION_IMPOSSIBLE_1    0
+#define DIRECTION_IMPOSSIBLE_2    5
+#define BASE                      10
 
 class Ihm
 {

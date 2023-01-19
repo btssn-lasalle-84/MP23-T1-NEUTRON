@@ -37,8 +37,8 @@ int JeuNeutron::demarrer()
 int JeuNeutron::jouerPartieUnJoueur()
 {
     this->ihm.afficherVersion();
-    bool premierCoup   = 1;
-    bool partieEnCours = 1;
+    bool premierCoup   = true;
+    bool partieEnCours = true;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
@@ -49,7 +49,7 @@ int JeuNeutron::jouerPartieUnJoueur()
         if(this->plateau.pionEstCoince())
         {
             this->ihm.feliciter((joueurActif + 1) % 2);
-            partieEnCours = 0;
+            partieEnCours = false;
         }
         else if(!premierCoup)
         {
@@ -59,7 +59,7 @@ int JeuNeutron::jouerPartieUnJoueur()
         if(campNeutron != CASE_NEUTRE)
         {
             this->ihm.feliciter(campNeutron);
-            partieEnCours = 0;
+            partieEnCours = false;
         }
         if(this->plateau.pionsSontCoinces(joueurActif))
         {
@@ -68,23 +68,23 @@ int JeuNeutron::jouerPartieUnJoueur()
                       << std::endl;
 #endif
             this->ihm.feliciter((joueurActif + 1) % 2);
-            partieEnCours = 0;
+            partieEnCours = false;
         }
         if(partieEnCours)
         {
             this->jouerUnCoup(0);
-            premierCoup = 0;
+            premierCoup = false;
         }
         this->joueurActif = (this->joueurActif + 1) % 2;
     }
     return 0;
 }
 
-void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
+void JeuNeutron::jouerUnCoup(bool estNeutron /*=true*/)
 {
     unsigned int direction;
     unsigned int erreur;
-    bool         directionInvalide = 1, pionNonSelectionne = 1;
+    bool         directionInvalide = true, pionNonSelectionne = true;
     unsigned int pionValeur, caseSelectionnee;
     unsigned int ligne, colonne;
 #ifdef DEBUG
@@ -121,25 +121,27 @@ void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
 #ifdef DEBUG
             std::cout << "Pion non Coincé" << std::endl;
 #endif
-            pionNonSelectionne = 0;
+            pionNonSelectionne = false;
         }
 #ifdef DEBUG
         std::cout << "Pion bien selectionne" << std::endl;
 #endif
         if(this->plateau.getContenuCase(ligne, colonne) ==
-           (unsigned int)joueurActif)
+             (unsigned int)joueurActif ||
+           (estNeutron &&
+            this->plateau.getContenuCase(ligne, colonne) == NEUTRON))
             direction = this->ihm.demandeUneDirection(this->joueurActif);
         else
             direction = 8;
         erreur =
           this->plateau.deplaceUnPion(direction, ligne, colonne, pionValeur);
         if(!erreur)
-            directionInvalide = 0;
+            directionInvalide = false;
         else
         {
             this->ihm.ecrireErreur(erreur);
             if(!estNeutron)
-                pionNonSelectionne = 1;
+                pionNonSelectionne = true;
         }
     }
     this->ihm.afficherPlateau(this->plateau);

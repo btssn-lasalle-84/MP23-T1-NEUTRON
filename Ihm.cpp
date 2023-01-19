@@ -63,14 +63,14 @@ unsigned int Ihm::demandeUneDirection(bool joueurActif) const
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
     std::cout << this->joueurs[joueurActif] << " doit saisir la direction : ";
-    do
+    std::cin >> choixDirection;
+
+    while(choixDirection == DIRECTION_IMPOSSIBLE_1 ||
+          choixDirection == DIRECTION_IMPOSSIBLE_2 || choixDirection >= BASE)
     {
+        std::cout << "Choix invalide, resélectionnez une direction : ";
         std::cin >> choixDirection;
-        if(choixDirection == 5 || choixDirection == 0 || choixDirection > 9)
-        {
-            std::cout << "Choix invalide, resélectionnez une direction : ";
-        }
-    } while(choixDirection == 5 || choixDirection == 0 || choixDirection > 9);
+    }
     return choixDirection;
 }
 
@@ -108,16 +108,14 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
     unsigned int choixPion;
 
     std::cout << this->joueurs[joueurActif] << " doit choisir un pion : ";
-    do
+    std::cin >> choixPion;
+
+    while(choixPion / BASE >= LARGEUR_DAMIER ||
+          choixPion % BASE >= LARGEUR_DAMIER)
     {
+        std::cout << "Entrée invalide, rentrer à nouveau un pion : ";
         std::cin >> choixPion;
-        if(choixPion / BASE >= LARGEUR_DAMIER &&
-           choixPion % BASE >= LARGEUR_DAMIER)
-        {
-            std::cout << "Entrée invalide, rentrer à nouveau un pion : ";
-        }
-    } while(choixPion / BASE >= LARGEUR_DAMIER ||
-            choixPion % BASE >= LARGEUR_DAMIER);
+    }
 #ifdef DEBUG
     std::cout << __PRETTY_FUNCTION__ << "sortie" << this << std::endl;
 #endif
@@ -134,7 +132,7 @@ void Ihm::feliciter(bool joueurActif)
 
 void Ihm::afficherVersion()
 {
-    std::cout << "Jeu Neutron 1.1" << std::endl;
+    std::cout << "Jeu Neutron 1.3" << std::endl;
 }
 
 void Ihm::afficherInformations()
