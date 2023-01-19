@@ -46,8 +46,10 @@ void Ihm::afficherPlateau(const Plateau& plateau) const
 
 void Ihm::definirJoueurs(unsigned int numero)
 {
+    std::string nom;
     std::cout << "Saisir le nom du joueur numero " << numero << std::endl;
-    std::cin >> this->joueurs[numero];
+    std::getline(std::cin, nom);
+    this->joueurs[numero] = nom;
 }
 
 unsigned int Ihm::demandeUneDirection(bool joueurActif) const
