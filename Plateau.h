@@ -58,6 +58,8 @@ class Plateau
                                unsigned int joueurActif = NEUTRON);
     unsigned int neutronEstDansCamp() const;
     unsigned int calculerScore(bool joueurActif) const;
+    unsigned int calculeNbDeplacements(unsigned int ligne,
+                                       unsigned int colonne) const;
 };
 
 #endif

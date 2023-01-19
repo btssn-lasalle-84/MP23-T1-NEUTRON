@@ -219,3 +219,19 @@ unsigned int Plateau::calculerScore(bool joueurActif) const
                  pow(-1, joueurActif);
     }
 }
+
+unsigned int Plateau::calculeNbDeplacements(unsigned int ligne,
+                                            unsigned int colonne) const
+{
+    unsigned int directionsPossibles = 0;
+    for(unsigned int indice = 0; indice < 7; ++indice)
+    {
+        if(damier[ligne + 1 - 2 * (((indice + 1) % 3) / 2)]
+                 [colonne + (indice + 1) % 3 - 2 * (((indice + 1) % 3) / 2)] ==
+           CASE_VIDE)
+        {
+            ++directionsPossibles;
+        }
+    }
+    return directionsPossibles;
+}
