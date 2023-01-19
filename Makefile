@@ -3,7 +3,7 @@ TARGET = neutron.out
 MAIN = main
 IHM = Ihm
 PLATEAU = Plateau
-JEUNEWTON = JeuNewton
+JEUNEUTRON = JeuNeutron
 SOURCES := $(wildcard *.cpp)
 HEADERS := $(wildcard *.h)
 
@@ -19,7 +19,7 @@ RM = rm -f
 
 all: $(TARGET)
 
-$(TARGET): $(MAIN).o $(IHM).o $(PLATEAU).o $(JEUNEWTON).o
+$(TARGET): $(MAIN).o $(IHM).o $(PLATEAU).o $(JEUNEUTRON).o
 	$(LD) $(TARGET) $^ $(CFLAGS)
 
 $(MAIN).o: $(MAIN).cpp
@@ -31,7 +31,7 @@ $(IHM).o: $(IHM).cpp
 $(PLATEAU).o: $(PLATEAU).cpp
 	$(CXX) $^
 
-$(JEUNEWTON).o: $(JEUNEWTON).cpp
+$(JEUNEUTRON).o: $(JEUNEUTRON).cpp
 	$(CXX) $^
 
 .PHONY: check cppcheck format clean cleanall

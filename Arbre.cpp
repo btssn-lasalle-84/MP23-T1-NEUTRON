@@ -112,7 +112,7 @@ int Arbre::simulerCoupsProton()
             return this->branche->simulerCoupsNeutron();
         else
         {
-            this->score = this->branche->plateau->calculerScore();
+            this->score = this->branche->plateau->calculerScore(this->profondeur % 2);
             this->branche->rapporterScore();
             return this->elaguer();
         }
