@@ -1,6 +1,6 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 /*                                                                            */
-/*        JeuNewton.h                                                         */
+/*        JeuNeutron.h */
 /*                                                                            */
 /*   By: Clément Trichet                                                      */
 /*                                                                            */
@@ -11,6 +11,10 @@
 
 #ifndef JEU_NEWTON_H
 #define JEU_NEWTON_H
+
+#ifdef DEBUG
+#include <iostream>
+#endif
 
 #include <string>
 #include <iostream>
@@ -25,7 +29,7 @@
 class IHM;
 class Plateau;
 
-class JeuNewton
+class JeuNeutron
 {
   private:
     Ihm     ihm;
@@ -33,8 +37,8 @@ class JeuNewton
     bool    joueurActif;
 
   public:
-    JeuNewton();
-    ~JeuNewton();
+    JeuNeutron();
+    ~JeuNeutron();
 
     void setJoueurActif(bool joueurActif);
     bool getJoueurActif() const;

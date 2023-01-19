@@ -31,6 +31,9 @@
 #define ERREUR_DIRECTION_INVALIDE 3
 #define BASE                      10
 
+#ifdef DEBUG
+#include <iostream>
+#endif
 class Plateau
 {
   private:

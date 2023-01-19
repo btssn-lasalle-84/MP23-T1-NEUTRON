@@ -11,10 +11,6 @@
 
 #include "Plateau.h"
 
-#ifdef DEBUG
-#include <iostream>
-#endif
-
 Plateau::Plateau() :
     coordonneesNeutron{ 2, 2 }, damier{
         { PION_JOUEUR_0,
@@ -58,6 +54,9 @@ unsigned int Plateau::getContenuCase(unsigned int ligne,
 bool Plateau::pionEstCoince(unsigned int ligne /*=NEUTRON_XY*/,
                             unsigned int colonne /*=NEUTRON_XY*/) const
 {
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+#endif
     if(ligne == 5)
     {
         ligne   = this->coordonneesNeutron[0];
@@ -75,6 +74,9 @@ bool Plateau::pionEstCoince(unsigned int ligne /*=NEUTRON_XY*/,
        (int(colonne) - 1 > -1 && this->damier[ligne - 1][colonne] == CASE_VIDE))
         return false;
     return true;
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << "sortie" << std::endl;
+#endif
 }
 
 bool Plateau::pionsSontCoinces(bool joueurActif) const
@@ -115,8 +117,8 @@ int Plateau::deplaceUnPion(unsigned int direction,
     if(this->damier[ligne][colonne] != pionValeur)
     {
 #ifdef DEBUG
-        std::cout << "pion pas à moi" << this->damier[i][j] << pionValeur
-                  << std::endl;
+        std::cout << "pion pas à moi" << this->damier[ligne][colonne]
+                  << pionValeur << std::endl;
 #endif
         return ERREUR_CASE_INVALIDE;
     }
@@ -128,9 +130,16 @@ int Plateau::deplaceUnPion(unsigned int direction,
         return ERREUR_PION_BLOQUE;
     }
     int nouvelleLigne =
-      ligne + (1 - direction / 4 - (direction / 7) * (direction / 4 % 2));
+      ligne +
+      (1 - direction / 4 -
+       (direction / 7) *
+         (direction / 4 % 2)); // incrémente ou décrémente le numéro de la ligne
+                               // en fonction de la direction choisie
     int nouvelleColonne =
-      colonne + (((direction + 1) % 3 % 2 - direction % 3 % 2));
+      colonne +
+      (((direction + 1) % 3 % 2 -
+        direction % 3 % 2)); // incrémente ou décrémente le numéro de la colonne
+                             // en fonction de la direction choisie
 #ifdef DEBUG
     std::cout << nouvelleLigne << " " << nouvelleColonne << std::endl;
 #endif

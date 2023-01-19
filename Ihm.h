@@ -38,6 +38,7 @@ class Ihm
     unsigned int selectionneUnPion(bool joueurActif);
     void         feliciter(bool joueurActif);
     void         afficherVersion();
+    void         afficherInformations();
 };
 
 #endif
