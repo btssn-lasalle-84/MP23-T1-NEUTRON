@@ -1,6 +1,6 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 /*                                                                            */
-/*        Ihm.h                                                               */
+/*        JeuNeutron.h */
 /*                                                                            */
 /*   By: Clément Trichet                                                      */
 /*                                                                            */
@@ -9,36 +9,43 @@
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
-#ifndef IHM_H
-#define IHM_H
+#ifndef JEU_NEWTON_H
+#define JEU_NEWTON_H
+
+#ifdef DEBUG
+#include <iostream>
+#endif
 
 #include <string>
+#include <iostream>
+#include "Ihm.h"
 #include "Plateau.h"
 
-#define NB_TIRETS                 21
-#define LARGEUR_DAMIER            5
-#define ERREUR_CASE_INVALIDE      1
-#define ERREUR_PION_BLOQUE        2
-#define ERREUR_DIRECTION_INVALIDE 3
-#define BASE                      10
+#define CASE_NEUTRE          2
+#define NEUTRON_XY           5
+#define ERREUR_CASE_INVALIDE 1
+#define BASE                 10
 
-class Ihm
+class IHM;
+class Plateau;
+
+class JeuNeutron
 {
   private:
-    std::string joueurs[2];
+    Ihm     ihm;
+    Plateau plateau;
+    bool    joueurActif;
 
   public:
-    Ihm();
-    ~Ihm();
+    JeuNeutron();
+    ~JeuNeutron();
 
-    void         afficherPlateau(const Plateau& plateau) const;
-    void         definirJoueurs(unsigned int numero);
-    unsigned int demandeUneDirection(bool joueurActif) const;
-    void         ecrireErreur(unsigned int erreur);
-    unsigned int selectionneUnPion(bool joueurActif);
-    void         feliciter(bool joueurActif);
-    void         afficherVersion();
-    void         afficherInformations();
+    void setJoueurActif(bool joueurActif);
+    bool getJoueurActif() const;
+
+    void jouerUnCoup(bool estNeutron = 1);
+    int  demarrer();
+    int  jouerPartieUnJoueur();
 };
 
 #endif

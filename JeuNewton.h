@@ -12,6 +12,10 @@
 #ifndef JEU_NEWTON_H
 #define JEU_NEWTON_H
 
+#ifdef DEBUG
+#include <iostream>
+#endif
+
 #include <string>
 #include <iostream>
 #include "Ihm.h"
