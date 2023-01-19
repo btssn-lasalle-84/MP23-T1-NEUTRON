@@ -82,7 +82,7 @@ void Ihm::ecrireErreur(unsigned int erreur)
     switch(erreur)
     {
         case ERREUR_CASE_INVALIDE:
-            std::cerr << "Il n'y a pas un de vos pion sur la case."
+            std::cerr << "Il n'y a pas un de vos pions sur la case."
                       << std::endl;
             break;
 
@@ -118,6 +118,9 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
         }
     } while(choixPion / BASE >= LARGEUR_DAMIER ||
             choixPion % BASE >= LARGEUR_DAMIER);
+#ifdef DEBUG
+    std::cout << __PRETTY_FUNCTION__ << "sortie" << this << std::endl;
+#endif
     return choixPion;
 }
 
@@ -132,4 +135,12 @@ void Ihm::feliciter(bool joueurActif)
 void Ihm::afficherVersion()
 {
     std::cout << "Jeu Neutron 1.1" << std::endl;
+}
+
+void Ihm::afficherInformations()
+{
+    std::cout << this->joueurs[0] << " jouera avec les pions 0 et "
+              << this->joueurs[1]
+              << " jouera avec les pions 1. Le pion 2 est le neutron."
+              << std::endl;
 }

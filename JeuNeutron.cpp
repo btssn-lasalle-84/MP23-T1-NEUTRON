@@ -1,40 +1,40 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 /*                                                                            */
-/*        JeuNewton.cpp                                                       */
+/*        JeuNeutron.cpp */
 /*                                                                            */
 /*   By: Clément Trichet                                                      */
 /*                                                                            */
 /*   Created: 2022/12/14 by C. Trichet                                        */
-/*   Updated: 2023/01/18 by C. Trichet                                        */
+/*   Updated: 2023/01/19 by C. Trichet                                        */
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
-#include "JeuNewton.h"
+#include "JeuNeutron.h"
 
-JeuNewton::JeuNewton() : joueurActif(0)
+JeuNeutron::JeuNeutron() : joueurActif(0)
 {
 }
 
-JeuNewton::~JeuNewton()
+JeuNeutron::~JeuNeutron()
 {
 }
 
-void JeuNewton::setJoueurActif(bool joueurActif)
+void JeuNeutron::setJoueurActif(bool joueurActif)
 {
     this->joueurActif = joueurActif;
 }
 
-bool JeuNewton::getJoueurActif() const
+bool JeuNeutron::getJoueurActif() const
 {
     return this->joueurActif;
 }
 
-int JeuNewton::demarrer()
+int JeuNeutron::demarrer()
 {
     return this->jouerPartieUnJoueur();
 }
 
-int JeuNewton::jouerPartieUnJoueur()
+int JeuNeutron::jouerPartieUnJoueur()
 {
     this->ihm.afficherVersion();
     bool premierCoup   = 1;
@@ -80,7 +80,7 @@ int JeuNewton::jouerPartieUnJoueur()
     return 0;
 }
 
-void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
+void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
 {
     unsigned int direction;
     unsigned int erreur;
@@ -103,9 +103,10 @@ void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
         {
             pionValeur       = (unsigned int)this->joueurActif;
             caseSelectionnee = this->ihm.selectionneUnPion(joueurActif);
-            ligne =
+            ligne            = caseSelectionnee / BASE;
+            colonne          = caseSelectionnee % BASE;
 #ifdef DEBUG
-              std::cout << "Tout va bien les copains" << std::endl;
+            std::cout << "Tout va bien les copains" << std::endl;
 #endif
             while(this->plateau.pionEstCoince(ligne, colonne))
             {
@@ -114,18 +115,22 @@ void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
 #endif
                 this->ihm.ecrireErreur(ERREUR_CASE_INVALIDE);
                 caseSelectionnee = this->ihm.selectionneUnPion(joueurActif);
+                ligne            = caseSelectionnee / BASE;
+                colonne          = caseSelectionnee % BASE;
             }
 #ifdef DEBUG
             std::cout << "Pion non Coincé" << std::endl;
 #endif
             pionNonSelectionne = 0;
-            ligne              = caseSelectionnee / BASE;
-            colonne            = caseSelectionnee % BASE;
         }
 #ifdef DEBUG
         std::cout << "Pion bien selectionne" << std::endl;
 #endif
-        direction = this->ihm.demandeUneDirection(this->joueurActif);
+        if(this->plateau.getContenuCase(ligne, colonne) ==
+           (unsigned int)joueurActif)
+            direction = this->ihm.demandeUneDirection(this->joueurActif);
+        else
+            direction = 8;
         erreur =
           this->plateau.deplaceUnPion(direction, ligne, colonne, pionValeur);
         if(!erreur)

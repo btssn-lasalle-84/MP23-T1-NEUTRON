@@ -42,11 +42,11 @@ et le neutron.
 - Auteurs :
   - Clement Trichet <<clement.trichet.pro@gmail.com>>
   - Mercklen Jérémy <<mercklenjeremy@gmail.com>>
-- Date : 2022
-- Version : 1.1
+- Date : 2023/01/19
+- Version : 1.2
 
 ## Problèmes identifiés
 
 - Bug si un caractère est entré lors de la séléction d'un pion ou d'une direction.
-- Pas possible de mettre des espaces dans les noms de joueurs.
+- Impossible de mettre des espaces dans les noms de joueurs.
 - Certaines directions invalides n'affichent pas de message d'erreur.

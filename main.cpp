@@ -9,11 +9,11 @@
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
-#include "JeuNewton.h"
+#include "JeuNeutron.h"
 
 int main()
 {
-    JeuNewton partie;
+    JeuNeutron partie;
 
     partie.demarrer();
 
