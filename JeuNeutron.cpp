@@ -126,7 +126,11 @@ void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
 #ifdef DEBUG
         std::cout << "Pion bien selectionne" << std::endl;
 #endif
-        direction = this->ihm.demandeUneDirection(this->joueurActif);
+        if(this->plateau.getContenuCase(ligne, colonne) ==
+           (unsigned int)joueurActif)
+            direction = this->ihm.demandeUneDirection(this->joueurActif);
+        else
+            direction = 8;
         erreur =
           this->plateau.deplaceUnPion(direction, ligne, colonne, pionValeur);
         if(!erreur)
