@@ -10,9 +10,9 @@
 
 ## Présentation
 
-Les joueurs se font face devant un damier 5x5. Au départ, chaque joueur dispose ses 5 pions (5 pions rouges et 5 pions bleus) sur la première rangée face à lui. Le pion neutre de couleur verte, appelé neutron, est placé dans la case centrale. Le but du jeu est d’amener le neutron dans son propre camp.
+Les joueurs se font face devant un damier 5x5. Au départ, chaque joueur à 5 pions (5 pions 0 et 5 pions 1) qui sont initialement placé sur la première et la dernière ligne. Le pion neutre est 2, appelé neutron, est placé dans la case centrale. Le but du jeu est d’amener le neutron dans son propre camp.
 
-Tous les pions se déplacent dans l’une des huit directions diagonales ou orthogonales, aussi loin que possible jusqu’à ce qu’ils rencontrent un obstacle : le bord du tablier ou un autre pion.
+Tous les pions se déplacent dans l’une des huit directions diagonales ou orthogonales (à l'aide du pavé numérique, 8 correspond par exemple à en haut), aussi loin que possible jusqu’à ce qu’ils rencontrent un obstacle : le bord du tablier ou un autre pion, pour séléctionner son pions, il faut mettre en premier le numéro de la ligne (la première ligne correspond a 0), et à la suite celui de la colonne (la première colonne correspond à 0).
 
 Le joueur qui commence la partie ne déplace pas le neutron au premier tour. Il déplace simplement une de ses pièces.
 
@@ -42,11 +42,11 @@ et le neutron.
 - Auteurs :
   - Clement Trichet <<clement.trichet.pro@gmail.com>>
   - Mercklen Jérémy <<mercklenjeremy@gmail.com>>
-- Date : 2022
-- Version : 1.0
+- Date : 2023/01/19
+- Version : 1.3
 
 ## Problèmes identifiés
 
 - Bug si un caractère est entré lors de la séléction d'un pion ou d'une direction.
-- Pas possible de mettre des espaces dans les noms de joueurs.
+- Impossible de mettre des espaces dans les noms de joueurs.
 - Certaines directions invalides n'affichent pas de message d'erreur.

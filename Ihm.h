@@ -9,10 +9,12 @@
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
-#include <string>
-#include "Plateau.h"
 #ifndef IHM_H
 #define IHM_H
+
+#include <string>
+#include "Plateau.h"
+
 #define NB_TIRETS                 21
 #define LARGEUR_DAMIER            5
 #define ERREUR_CASE_INVALIDE      1
@@ -20,6 +22,10 @@
 #define ERREUR_DIRECTION_INVALIDE 3
 #define NB_CHOIX_MENU             5
 #define NB_CHOIX_MODE_DE_JEU      2
+#define BASE                      10
+#define DIRECTION_IMPOSSIBLE_1    0
+#define DIRECTION_IMPOSSIBLE_2    5
+#define BASE                      10
 
 class Ihm
 {
@@ -41,6 +47,8 @@ class Ihm
     bool         choisirPremierJoueur(bool unJoueur) const;
     void         effacerEcran() const;
     void         feliciter(bool joueurActif);
+    void         afficherVersion();
+    void         afficherInformations();
 };
 
 #endif

@@ -1,11 +1,11 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 /*                                                                            */
-/*        JeuNeutron.cpp */
+/*        JeuNeutron.cpp                                                      */
 /*                                                                            */
 /*   By: Clément Trichet                                                      */
 /*                                                                            */
 /*   Created: 2022/12/14 by C. Trichet                                        */
-/*   Updated: 2022/12/14 by C. Trichet                                        */
+/*   Updated: 2023/01/19 by C. Trichet                                        */
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
@@ -31,24 +31,35 @@ bool JeuNeutron::getJoueurActif() const
 
 int JeuNeutron::demarrer()
 {
-    bool premierCoup = 1;
+    return this->jouerPartieUnJoueur();
+}
+
+int JeuNeutron::jouerPartieUnJoueur()
+{
+    this->ihm.afficherVersion();
+    bool premierCoup   = true;
+    bool partieEnCours = true;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
+    this->ihm.afficherInformations();
     this->ihm.afficherPlateau(this->plateau);
-    while(true)
+    while(partieEnCours)
     {
         if(this->plateau.pionEstCoince())
         {
             this->ihm.feliciter((joueurActif + 1) % 2);
-            return 0;
+            partieEnCours = false;
         }
-        this->jouerUnCoup(1);
+        else if(!premierCoup)
+        {
+            this->jouerUnCoup(1);
+        }
         int campNeutron = this->plateau.neutronEstDansCamp();
         if(campNeutron != CASE_NEUTRE)
         {
             this->ihm.feliciter(campNeutron);
-            return 0;
+            partieEnCours = false;
         }
         if(this->plateau.pionsSontCoinces(joueurActif))
         {
@@ -57,22 +68,25 @@ int JeuNeutron::demarrer()
                       << std::endl;
 #endif
             this->ihm.feliciter((joueurActif + 1) % 2);
-            return 0;
+            partieEnCours = false;
         }
-        if(!premierCoup)
+        if(partieEnCours)
+        {
             this->jouerUnCoup(0);
+            premierCoup = false;
+        }
         this->joueurActif = (this->joueurActif + 1) % 2;
-        premierCoup       = 0;
     }
+    return 0;
 }
 
-void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
+void JeuNeutron::jouerUnCoup(bool estNeutron /*=true*/)
 {
     unsigned int direction;
     unsigned int erreur;
-    bool         directionInvalide = 1, pionNonSelectionne = 1;
-    unsigned int pionValeur, caseSelectionne;
-    unsigned int i, j;
+    bool         directionInvalide = true, pionNonSelectionne = true;
+    unsigned int pionValeur, caseSelectionnee;
+    unsigned int ligne, colonne;
 #ifdef DEBUG
     std::cout << "estNeutron" << estNeutron << std::endl;
 #endif
@@ -80,33 +94,54 @@ void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
     {
         if(estNeutron)
         {
-            caseSelectionne = this->plateau.getCoordonneesNeutron();
-            i               = caseSelectionne / 10;
-            j               = caseSelectionne % 10;
-            pionValeur      = NEUTRON;
+            caseSelectionnee = this->plateau.getCoordonneesNeutron();
+            ligne            = caseSelectionnee / BASE;
+            colonne          = caseSelectionnee % BASE;
+            pionValeur       = NEUTRON;
         }
         else if(pionNonSelectionne)
         {
-            pionValeur      = (unsigned int)this->joueurActif;
-            caseSelectionne = this->ihm.selectionneUnPion(joueurActif);
-            while(this->plateau.pionEstCoince(i, j))
+            pionValeur       = (unsigned int)this->joueurActif;
+            caseSelectionnee = this->ihm.selectionneUnPion(joueurActif);
+            ligne            = caseSelectionnee / BASE;
+            colonne          = caseSelectionnee % BASE;
+#ifdef DEBUG
+            std::cout << "Tout va bien les copains" << std::endl;
+#endif
+            while(this->plateau.pionEstCoince(ligne, colonne))
             {
+#ifdef DEBUG
+                std::cout << "Tant que pionCoincé" << std::endl;
+#endif
                 this->ihm.ecrireErreur(ERREUR_CASE_INVALIDE);
-                caseSelectionne = this->ihm.selectionneUnPion(joueurActif);
+                caseSelectionnee = this->ihm.selectionneUnPion(joueurActif);
+                ligne            = caseSelectionnee / BASE;
+                colonne          = caseSelectionnee % BASE;
             }
-            pionNonSelectionne = 0;
-            i                  = caseSelectionne / 10;
-            j                  = caseSelectionne % 10;
+#ifdef DEBUG
+            std::cout << "Pion non Coincé" << std::endl;
+#endif
+            pionNonSelectionne = false;
         }
-        direction = this->ihm.demandeUneDirection(this->joueurActif);
-        erreur    = this->plateau.deplaceUnPion(direction, i, j, pionValeur);
+#ifdef DEBUG
+        std::cout << "Pion bien selectionne" << std::endl;
+#endif
+        if(this->plateau.getContenuCase(ligne, colonne) ==
+             (unsigned int)joueurActif ||
+           (estNeutron &&
+            this->plateau.getContenuCase(ligne, colonne) == NEUTRON))
+            direction = this->ihm.demandeUneDirection(this->joueurActif);
+        else
+            direction = 8;
+        erreur =
+          this->plateau.deplaceUnPion(direction, ligne, colonne, pionValeur);
         if(!erreur)
-            directionInvalide = 0;
+            directionInvalide = false;
         else
         {
             this->ihm.ecrireErreur(erreur);
             if(!estNeutron)
-                pionNonSelectionne = 1;
+                pionNonSelectionne = true;
         }
     }
     this->ihm.afficherPlateau(this->plateau);
