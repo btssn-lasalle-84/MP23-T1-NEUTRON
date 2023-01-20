@@ -1,6 +1,6 @@
 /*////////////////////////////////////////////////////////////////////////////*/
 /*                                                                            */
-/*        JeuNewton.cpp                                                       */
+/*        JeuNeutron.cpp */
 /*                                                                            */
 /*   By: Clément Trichet                                                      */
 /*                                                                            */
@@ -9,27 +9,27 @@
 /*                                                                            */
 /*////////////////////////////////////////////////////////////////////////////*/
 
-#include "JeuNewton.h"
+#include "JeuNeutron.h"
 
-JeuNewton::JeuNewton() : joueurActif(0)
+JeuNeutron::JeuNeutron() : joueurActif(0)
 {
 }
 
-JeuNewton::~JeuNewton()
+JeuNeutron::~JeuNeutron()
 {
 }
 
-void JeuNewton::setJoueurActif(bool joueurActif)
+void JeuNeutron::setJoueurActif(bool joueurActif)
 {
     this->joueurActif = joueurActif;
 }
 
-bool JeuNewton::getJoueurActif() const
+bool JeuNeutron::getJoueurActif() const
 {
     return this->joueurActif;
 }
 
-int JeuNewton::demarrer()
+int JeuNeutron::demarrer()
 {
     bool premierCoup = 1;
 
@@ -66,7 +66,7 @@ int JeuNewton::demarrer()
     }
 }
 
-void JeuNewton::jouerUnCoup(bool estNeutron /*=1*/)
+void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
 {
     unsigned int direction;
     unsigned int erreur;

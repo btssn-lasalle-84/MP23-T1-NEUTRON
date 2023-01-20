@@ -129,6 +129,9 @@ unsigned int Ihm::afficherMenu() const
         std::cout << "Entrez votre choix : ";
         std::cin >> choix;
     }
+
+    effacerEcran();
+
     return choix;
 }
 
@@ -191,18 +194,35 @@ unsigned int Ihm::afficherChoixModeDeJeu() const
         std::cout << "Entrez votre choix : ";
         std::cin >> choix;
     }
+
+    effacerEcran();
+
     return choix;
 }
 
-unsigned int Ihm::choisirPremierJoueur() const
+bool Ihm::choisirPremierJoueur(bool unJoueur) const
 {
-    unsigned int choix = 0;
+    bool choix = 0;
 
-    while(choix != 1 && choix != 2)
+    if(!unJoueur)
     {
-        std::cout << "Veuillez choisir le joueur qui commence : ";
+        std::cout << "0 : Le premier joueur commence\n"
+                  << "1 : Le deuxième joueur commence\n";
+    }
+    else
+    {
+        std::cout << "0 : Vous commencez\n"
+                  << "1 : L'IA commence\n";
+    }
+
+    while(choix != 0 && choix != 1)
+    {
+        std::cout << "Entrez votre choix :";
         std::cin >> choix;
     }
+
+    effacerEcran();
+
     return choix;
 }
 

@@ -38,7 +38,7 @@ class Ihm
     unsigned int afficherMenu() const;
     void         afficherRegles() const;
     unsigned int afficherChoixModeDeJeu() const;
-    unsigned int choisirPremierJoueur() const;
+    bool         choisirPremierJoueur(bool unJoueur) const;
     void         effacerEcran() const;
     void         feliciter(bool joueurActif);
 };
