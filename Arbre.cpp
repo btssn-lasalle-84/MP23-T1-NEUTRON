@@ -45,7 +45,7 @@ int Arbre::simulerCoupsNeutron()
         {
             if(this->score == SCORE_DEFAUT)
             {
-                this->score = SCORE_MAX * pow(-1, profondeur);
+                this->score = SCORE_MAX * pow(-1, (profondeur + 1) % 2);
             }
             return this->elaguer(true);
         }
@@ -56,8 +56,25 @@ int Arbre::simulerCoupsNeutron()
     unsigned int erreur = this->sousPlateau->deplaceUnPion(this->compteurs[0]);
     if(erreur == ERREUR_PION_BLOQUE)
     {
-        this->compteurs[0] = NB_DIRECTIONS;
+        this->compteurs[0] = NB_DIRECTIONS; //
         return this->simulerCoupsNeutron();
+    }
+    int campNeutron = this->sousPlateau->neutronEstDansCamp();
+    if(campNeutron != AUCUN_CAMP)
+    {
+        int score = SCORE_MAX * pow(-1, (this->profondeur % 2 == campNeutron));
+        if((score > this->score && this->profondeur % 2) ||
+           (score < this->score && (this->profondeur + 1) % 2) ||
+           this->score == SCORE_DEFAUT)
+        {
+            this->score = score;
+            return this->elaguer(true);
+        }
+        else
+        {
+            ++this->compteurs[0];
+            return this->simulerCoupsNeutron();
+        }
     }
     else
     {
@@ -112,8 +129,9 @@ int Arbre::simulerCoupsProton()
             return this->branche->simulerCoupsNeutron();
         else
         {
-            this->score = this->branche->plateau->calculerScore(this->profondeur % 2);
-            this->branche->rapporterScore();
+            this->score =
+              this->branche->plateau->calculerScore(this->profondeur % 2);
+            //      this->branche->rapporterScore();
             return this->elaguer();
         }
     }
@@ -149,7 +167,9 @@ int Arbre::elaguer(bool derniereBranche /*=false*/)
     }
     else
     {
-        if(this->comparerScores())
+        if(
+          this
+            ->comparerScores()) // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             return this->simulerCoupsProton();
         else
         {

@@ -144,3 +144,49 @@ void JeuNeutron::jouerUnCoup(bool estNeutron /*=1*/)
     }
     this->ihm.afficherPlateau(this->plateau);
 }
+
+int JeuNeutron::jouerPartieUnJoueur()
+{
+    bool premierCoup   = true;
+    bool partieEnCours = true;
+    this->joueurActif  = this->ihm.choisirPremierJoueur(true);
+
+    this->ihm.definirJoueurs(0);
+    this->ihm.afficherPlateau(this->plateau);
+    while(partieEnCours)
+    {
+        if(this->plateau.pionEstCoince())
+        {
+            this->ihm.feliciter((joueurActif + 1) % 2);
+            partieEnCours = 0;
+        }
+        else if(!premierCoup)
+        {
+            if(this->joueurActif)
+                this->IAJoueUnCoup(1) else this->jouerUnCoup(1);
+        }
+        int campNeutron = this->plateau.neutronEstDansCamp();
+        if(campNeutron != CASE_NEUTRE)
+        {
+            this->ihm.feliciter(campNeutron);
+            partieEnCours = 0;
+        }
+        if(this->plateau.pionsSontCoinces(joueurActif))
+        {
+#ifdef DEBUG
+            std::cout << "Les pions du joueur " << joueurActif << "sont coincés"
+                      << std::endl;
+#endif
+            this->ihm.feliciter((joueurActif + 1) % 2);
+            partieEnCours = 0;
+        }
+        if((partieEnCours && joueurActif == 0) ||)
+        {
+            if(this->joueurActif)
+                this->IAJoueUnCoup(0) else this->jouerUnCoup(0);
+            premierCoup = 0;
+        }
+        this->joueurActif = (this->joueurActif + 1) % 2;
+    }
+    return 0;
+}
