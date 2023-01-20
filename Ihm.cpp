@@ -47,6 +47,8 @@ void Ihm::afficherPlateau(const Plateau& plateau) const
 
 void Ihm::definirJoueurs(unsigned int numero)
 {
+    std::string nom;
+
     std::cout << "Saisir le nom du ";
     if(numero == 1)
         std::cout << "second";
@@ -248,7 +250,7 @@ void Ihm::feliciter(bool joueurActif)
 
 void Ihm::afficherVersion()
 {
-    std::cout << "Jeu Neutron 1.3" << std::endl;
+    std::cout << "Jeu Neutron 1.2" << std::endl;
 }
 
 void Ihm::afficherInformations()

@@ -43,7 +43,7 @@ et le neutron.
   - Clement Trichet <<clement.trichet.pro@gmail.com>>
   - Mercklen Jérémy <<mercklenjeremy@gmail.com>>
 - Date : 2023/01/19
-- Version : 1.3
+- Version : 1.2
 
 ## Problèmes identifiés
 
