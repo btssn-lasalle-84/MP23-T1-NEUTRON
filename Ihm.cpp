@@ -132,8 +132,8 @@ unsigned int Ihm::afficherMenu() const
     std::cout << "1 : Lancer une partie\n"
               << "2 : Afficher l'historique\n"
               << "3 : Afficher les règles du jeu\n"
-              << "5 : Fermer le jeu\n";
-    while(choix == 0 || choix < NB_CHOIX_MENU)
+              << "4 : Fermer le jeu\n";
+    while(choix == 0 && choix < NB_CHOIX_MENU)
     {
         std::cout << "Entrez votre choix : ";
         std::cin >> choix;

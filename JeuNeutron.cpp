@@ -31,7 +31,32 @@ bool JeuNeutron::getJoueurActif() const
 
 int JeuNeutron::demarrer()
 {
-    return this->jouerPartieUnJoueur();
+    bool fin = false;
+    do
+    {
+        unsigned int choix = this->ihm.afficherMenu();
+        switch(choix)
+        {
+            case 1:
+                this->jouerPartieUnJoueur();
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                this->ihm.afficherRegles();
+                break;
+
+            case 4:
+                fin = true;
+
+            default:
+                break;
+        }
+    } while(!fin);
+
+    return 0;
 }
 
 int JeuNeutron::jouerPartieUnJoueur()
