@@ -49,6 +49,7 @@ class Ihm
     void         feliciter(bool joueurActif);
     void         afficherVersion();
     void         afficherInformations();
+    void         changerOrdreJoueur();
 };
 
 #endif
