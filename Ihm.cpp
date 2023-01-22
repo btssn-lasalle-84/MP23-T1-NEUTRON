@@ -246,19 +246,38 @@ void Ihm::feliciter(bool joueurActif)
 #endif
     effacerEcran();
     std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
+
+    historique.push_back(this->joueurs[0] + " contre " + this->joueurs[1] +
+                         " : " + this->joueurs[joueurActif] + " à gagné");
 }
 
-void Ihm::afficherVersion()
+void Ihm::afficherVersion() const
 {
     std::cout << "Jeu Neutron 1.2\n" << std::endl;
 }
 
-void Ihm::afficherInformations()
+void Ihm::afficherInformations() const
 {
     std::cout << this->joueurs[0] << " jouera avec les pions 0 et "
               << this->joueurs[1]
               << " jouera avec les pions 1. Le pion 2 est le neutron."
               << std::endl;
+}
+
+void Ihm::afficherHistorique() const
+{
+    if(historique.size() == 0)
+    {
+        std::cout << "Aucune partie n'a été jouée\n" << std::endl;
+    }
+    else
+    {
+        for(unsigned int i = 0; i < historique.size(); ++i)
+        {
+            std::cout << historique.at(i) << std::endl;
+        }
+        std::cout << std::endl;
+    }
 }
 
 void Ihm::changerOrdreJoueur()

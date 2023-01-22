@@ -56,6 +56,7 @@ class Plateau
                                unsigned int colonne     = NEUTRON_XY,
                                unsigned int joueurActif = NEUTRON);
     unsigned int neutronEstDansCamp() const;
+    void         remiseAZero();
 };
 
 #endif

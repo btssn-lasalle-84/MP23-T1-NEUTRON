@@ -46,6 +46,7 @@ int JeuNeutron::demarrer()
                 break;
 
             case HISTORIQUE:
+                this->ihm.afficherHistorique();
                 break;
 
             case AFFICHER_REGLES:
@@ -113,6 +114,8 @@ int JeuNeutron::jouerPartieUnJoueur()
         }
         this->joueurActif = (this->joueurActif + 1) % 2;
     }
+
+    this->plateau.remiseAZero();
     return 0;
 }
 
