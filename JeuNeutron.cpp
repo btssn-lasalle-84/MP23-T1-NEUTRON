@@ -31,17 +31,53 @@ bool JeuNeutron::getJoueurActif() const
 
 int JeuNeutron::demarrer()
 {
-    return this->jouerPartieUnJoueur();
+    bool fin = false;
+
+    this->ihm.effacerEcran();
+    this->ihm.afficherVersion();
+
+    do
+    {
+        unsigned int choix = this->ihm.afficherMenu();
+        switch(choix)
+        {
+            case LANCER_PARTIE:
+                this->jouerPartieUnJoueur();
+                break;
+
+            case HISTORIQUE:
+                break;
+
+            case AFFICHER_REGLES:
+                this->ihm.afficherRegles();
+                break;
+
+            case QUITTER_JEU:
+                fin = true;
+
+            default:
+                break;
+        }
+    } while(!fin);
+
+    return 0;
 }
 
 int JeuNeutron::jouerPartieUnJoueur()
 {
-    this->ihm.afficherVersion();
     bool premierCoup   = true;
     bool partieEnCours = true;
+    bool unJoueur      = false;
+    bool joueurDeuxCommence;
 
     this->ihm.definirJoueurs(0);
     this->ihm.definirJoueurs(1);
+    joueurDeuxCommence = this->ihm.choisirPremierJoueur(unJoueur);
+    if(joueurDeuxCommence)
+    {
+        this->ihm.changerOrdreJoueur();
+    }
+
     this->ihm.afficherInformations();
     this->ihm.afficherPlateau(this->plateau);
     while(partieEnCours)
@@ -144,5 +180,6 @@ void JeuNeutron::jouerUnCoup(bool estNeutron /*=true*/)
                 pionNonSelectionne = true;
         }
     }
+    this->ihm.effacerEcran();
     this->ihm.afficherPlateau(this->plateau);
 }

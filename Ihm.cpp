@@ -55,8 +55,7 @@ void Ihm::definirJoueurs(unsigned int numero)
     else if(numero == 0)
         std::cout << "premier";
     std::cout << " joueur : ";
-    std::getline(std::cin, nom);
-    this->joueurs[numero] = nom;
+    std::cin >> this->joueurs[numero];
 }
 
 unsigned int Ihm::demandeUneDirection(bool joueurActif) const
@@ -132,8 +131,8 @@ unsigned int Ihm::afficherMenu() const
     std::cout << "1 : Lancer une partie\n"
               << "2 : Afficher l'historique\n"
               << "3 : Afficher les règles du jeu\n"
-              << "5 : Fermer le jeu\n";
-    while(choix == 0 || choix < NB_CHOIX_MENU)
+              << "4 : Fermer le jeu\n";
+    while(choix == 0 && choix < NB_CHOIX_MENU)
     {
         std::cout << "Entrez votre choix : ";
         std::cin >> choix;
@@ -151,7 +150,7 @@ void Ihm::afficherRegles() const
          "joueur à 5 pions (5 pions 0 et 5 pions 1) qui sont initialement "
          "placé sur la première et la dernière ligne. Le pion neutre est 2, "
          "appelé neutron, est placé dans la case centrale. Le but du jeu est "
-         "d’amener le neutron dans son propre camp."
+         "d’amener le neutron dans son propre camp.\n"
       << std::endl;
     std::cout
       << "Tous les pions se déplacent dans l’une des huit directions "
@@ -162,17 +161,17 @@ void Ihm::afficherRegles() const
          "ligne (la première ligne correspond a 0), et à la suite celui de la "
          "colonne (la première colonne correspond à 0), donc, par exemple, "
          "pour un pion qui est sur la première ligne et la 3ème colonne, il "
-         "faudrait mettre 02."
+         "faudrait mettre 02.\n"
       << std::endl;
     std::cout << "Le joueur qui commence la partie ne déplace pas le neutron "
-                 "au premier tour. Il déplace simplement une de ses pièces."
+                 "au premier tour. Il déplace simplement une de ses pièces.\n"
               << std::endl;
     std::cout
       << "Puis, à tour de rôle, les joueurs doivent d’abord, déplacer le "
          "neutron, puis déplacer un de leurs pions. Le joueur qui a amené le "
          "neutron dans son propre camp à gagné. Si un joueur ne peut pas "
          "déplacer le neutron ou un de ses pions il a perdu, de même s’il est "
-         "obligé d’amener le neutron dans le camp adverse."
+         "obligé d’amener le neutron dans le camp adverse.\n"
       << std::endl;
     std::cout << "Il existe donc quatre façons de gagner :" << std::endl;
     std::cout << "    - amener le neutron dans son propre camp, c’est-à-dire "
@@ -187,7 +186,7 @@ void Ihm::afficherRegles() const
       << std::endl;
     std::cout
       << "    - que toutes les cases de l’adversaire soient occupées par cinq "
-         "de ses pions ou par quatre de ses pions et le neutron.)"
+         "de ses pions ou par quatre de ses pions et le neutron.)\n"
       << std::endl;
 }
 
@@ -211,7 +210,7 @@ unsigned int Ihm::afficherChoixModeDeJeu() const
 
 bool Ihm::choisirPremierJoueur(bool unJoueur) const
 {
-    bool choix = 0;
+    bool choix;
 
     if(!unJoueur)
     {
@@ -224,11 +223,11 @@ bool Ihm::choisirPremierJoueur(bool unJoueur) const
                   << "1 : L'IA commence\n";
     }
 
-    while(choix != 0 && choix != 1)
+    do
     {
-        std::cout << "Entrez votre choix :";
+        std::cout << "Entrez votre choix : ";
         std::cin >> choix;
-    }
+    } while(choix != false && choix != true);
 
     effacerEcran();
 
@@ -245,12 +244,13 @@ void Ihm::feliciter(bool joueurActif)
 #ifdef DEBUG
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
+    effacerEcran();
     std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
 }
 
 void Ihm::afficherVersion()
 {
-    std::cout << "Jeu Neutron 1.2" << std::endl;
+    std::cout << "Jeu Neutron 1.2\n" << std::endl;
 }
 
 void Ihm::afficherInformations()
@@ -259,4 +259,13 @@ void Ihm::afficherInformations()
               << this->joueurs[1]
               << " jouera avec les pions 1. Le pion 2 est le neutron."
               << std::endl;
+}
+
+void Ihm::changerOrdreJoueur()
+{
+    std::string stockageJoueur;
+
+    stockageJoueur   = this->joueurs[0];
+    this->joueurs[0] = this->joueurs[1];
+    this->joueurs[1] = stockageJoueur;
 }

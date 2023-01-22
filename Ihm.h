@@ -20,7 +20,7 @@
 #define ERREUR_CASE_INVALIDE      1
 #define ERREUR_PION_BLOQUE        2
 #define ERREUR_DIRECTION_INVALIDE 3
-#define NB_CHOIX_MENU             5
+#define NB_CHOIX_MENU             4
 #define NB_CHOIX_MODE_DE_JEU      2
 #define BASE                      10
 #define DIRECTION_IMPOSSIBLE_1    0
@@ -49,6 +49,7 @@ class Ihm
     void         feliciter(bool joueurActif);
     void         afficherVersion();
     void         afficherInformations();
+    void         changerOrdreJoueur();
 };
 
 #endif
