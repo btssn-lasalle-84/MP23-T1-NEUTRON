@@ -244,6 +244,7 @@ void Ihm::feliciter(bool joueurActif)
 #ifdef DEBUG
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
+    effacerEcran();
     std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
 }
 
