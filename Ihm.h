@@ -30,7 +30,8 @@
 class Ihm
 {
   private:
-    std::string joueurs[2];
+    std::string              joueurs[2];
+    std::vector<std::string> historique;
 
   public:
     Ihm();
@@ -47,8 +48,9 @@ class Ihm
     bool         choisirPremierJoueur(bool unJoueur) const;
     void         effacerEcran() const;
     void         feliciter(bool joueurActif);
-    void         afficherVersion();
-    void         afficherInformations();
+    void         afficherVersion() const;
+    void         afficherInformations() const;
+    void         afficherHistorique() const;
     void         changerOrdreJoueur();
 };
 
