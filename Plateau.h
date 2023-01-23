@@ -42,6 +42,7 @@ class Plateau
 
   public:
     Plateau();
+    Plateau(const Plateau& plateau);
     ~Plateau();
 
     void setCoordonneesNeutron(unsigned int ligne, unsigned int colonne);

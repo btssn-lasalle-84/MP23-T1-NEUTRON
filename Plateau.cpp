@@ -30,6 +30,20 @@ Plateau::Plateau() :
 {
 }
 
+Plateau::Plateau(const Plateau& plateau)
+{
+    coordonneesNeutron[0] = plateau.coordonneesNeutron[0];
+    coordonneesNeutron[1] = plateau.coordonneesNeutron[1];
+
+    for(unsigned int ligne = 0; ligne < NB_LIGNES; ++ligne)
+    {
+        for(unsigned int colonne = 0; colonne < NB_COLONNES; ++colonne)
+        {
+            damier[ligne][colonne] = plateau.damier[ligne][colonne];
+        }
+    }
+}
+
 Plateau::~Plateau()
 {
 }
