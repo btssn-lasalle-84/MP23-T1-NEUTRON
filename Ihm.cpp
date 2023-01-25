@@ -253,7 +253,7 @@ void Ihm::feliciter(bool joueurActif)
 
 void Ihm::afficherVersion() const
 {
-    std::cout << "Jeu Neutron 1.2\n" << std::endl;
+    std::cout << "Jeu Neutron 2.0\n" << std::endl;
 }
 
 void Ihm::afficherInformations() const
