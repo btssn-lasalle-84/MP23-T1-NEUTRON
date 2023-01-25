@@ -20,6 +20,8 @@
 #define ERREUR_CASE_INVALIDE      1
 #define ERREUR_PION_BLOQUE        2
 #define ERREUR_DIRECTION_INVALIDE 3
+#define NB_CHOIX_MENU             4
+#define NB_CHOIX_MODE_DE_JEU      2
 #define BASE                      10
 #define DIRECTION_IMPOSSIBLE_1    0
 #define DIRECTION_IMPOSSIBLE_2    5
@@ -28,7 +30,8 @@
 class Ihm
 {
   private:
-    std::string joueurs[2];
+    std::string              joueurs[2];
+    std::vector<std::string> historique;
 
   public:
     Ihm();
@@ -39,9 +42,16 @@ class Ihm
     unsigned int demandeUneDirection(bool joueurActif) const;
     void         ecrireErreur(unsigned int erreur);
     unsigned int selectionneUnPion(bool joueurActif);
+    unsigned int afficherMenu() const;
+    void         afficherRegles() const;
+    unsigned int afficherChoixModeDeJeu() const;
+    bool         choisirPremierJoueur(bool unJoueur) const;
+    void         effacerEcran() const;
     void         feliciter(bool joueurActif);
-    void         afficherVersion();
-    void         afficherInformations();
+    void         afficherVersion() const;
+    void         afficherInformations() const;
+    void         afficherHistorique() const;
+    void         changerOrdreJoueur();
 };
 
 #endif

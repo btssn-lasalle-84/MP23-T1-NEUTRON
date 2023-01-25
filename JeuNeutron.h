@@ -25,6 +25,10 @@
 #define NEUTRON_XY           5
 #define ERREUR_CASE_INVALIDE 1
 #define BASE                 10
+#define LANCER_PARTIE        1
+#define HISTORIQUE           2
+#define AFFICHER_REGLES      3
+#define QUITTER_JEU          4
 
 class IHM;
 class Plateau;

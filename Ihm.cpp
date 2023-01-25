@@ -47,6 +47,8 @@ void Ihm::afficherPlateau(const Plateau& plateau) const
 
 void Ihm::definirJoueurs(unsigned int numero)
 {
+    std::string nom;
+
     std::cout << "Saisir le nom du ";
     if(numero == 1)
         std::cout << "second";
@@ -122,23 +124,168 @@ unsigned int Ihm::selectionneUnPion(bool joueurActif)
     return choixPion;
 }
 
+unsigned int Ihm::afficherMenu() const
+{
+    unsigned int choix = 0;
+
+    std::cout << "1 : Lancer une partie\n"
+              << "2 : Afficher l'historique\n"
+              << "3 : Afficher les règles du jeu\n"
+              << "4 : Fermer le jeu\n";
+    while(choix == 0 && choix < NB_CHOIX_MENU)
+    {
+        std::cout << "Entrez votre choix : ";
+        std::cin >> choix;
+    }
+
+    effacerEcran();
+
+    return choix;
+}
+
+void Ihm::afficherRegles() const
+{
+    std::cout
+      << "Les joueurs se font face devant un damier 5x5. Au départ, chaque "
+         "joueur à 5 pions (5 pions 0 et 5 pions 1) qui sont initialement "
+         "placé sur la première et la dernière ligne. Le pion neutre est 2, "
+         "appelé neutron, est placé dans la case centrale. Le but du jeu est "
+         "d’amener le neutron dans son propre camp.\n"
+      << std::endl;
+    std::cout
+      << "Tous les pions se déplacent dans l’une des huit directions "
+         "diagonales ou orthogonales (à l'aide du pavé numérique, 8 correspond "
+         "par exemple à en haut), aussi loin que possible jusqu’à ce qu’ils "
+         "rencontrent un obstacle : le bord du tablier ou un autre pion, pour "
+         "séléctionner son pions, il faut mettre en premier le numéro de la "
+         "ligne (la première ligne correspond a 0), et à la suite celui de la "
+         "colonne (la première colonne correspond à 0), donc, par exemple, "
+         "pour un pion qui est sur la première ligne et la 3ème colonne, il "
+         "faudrait mettre 02.\n"
+      << std::endl;
+    std::cout << "Le joueur qui commence la partie ne déplace pas le neutron "
+                 "au premier tour. Il déplace simplement une de ses pièces.\n"
+              << std::endl;
+    std::cout
+      << "Puis, à tour de rôle, les joueurs doivent d’abord, déplacer le "
+         "neutron, puis déplacer un de leurs pions. Le joueur qui a amené le "
+         "neutron dans son propre camp à gagné. Si un joueur ne peut pas "
+         "déplacer le neutron ou un de ses pions il a perdu, de même s’il est "
+         "obligé d’amener le neutron dans le camp adverse.\n"
+      << std::endl;
+    std::cout << "Il existe donc quatre façons de gagner :" << std::endl;
+    std::cout << "    - amener le neutron dans son propre camp, c’est-à-dire "
+                 "sur sa propre ligne de départ ;"
+              << std::endl;
+    std::cout << "    - forcer l’adversaire à amener lui-même le neutron sur "
+                 "la ligne de départ adverse ;"
+              << std::endl;
+    std::cout
+      << "    - placer l’adversaire dans une situation où il ne peut pas "
+         "déplacer le neutron ou un de ses pions (gagner à l’étouffée) ;"
+      << std::endl;
+    std::cout
+      << "    - que toutes les cases de l’adversaire soient occupées par cinq "
+         "de ses pions ou par quatre de ses pions et le neutron.)\n"
+      << std::endl;
+}
+
+unsigned int Ihm::afficherChoixModeDeJeu() const
+{
+    unsigned int choix = 0;
+
+    std::cout << "1 : un joueur\n"
+              << "2 : deux joueurs\n";
+
+    while(choix == 0 || choix < NB_CHOIX_MODE_DE_JEU)
+    {
+        std::cout << "Entrez votre choix : ";
+        std::cin >> choix;
+    }
+
+    effacerEcran();
+
+    return choix;
+}
+
+bool Ihm::choisirPremierJoueur(bool unJoueur) const
+{
+    bool choix;
+
+    if(!unJoueur)
+    {
+        std::cout << "0 : Le premier joueur commence\n"
+                  << "1 : Le deuxième joueur commence\n";
+    }
+    else
+    {
+        std::cout << "0 : Vous commencez\n"
+                  << "1 : L'IA commence\n";
+    }
+
+    do
+    {
+        std::cout << "Entrez votre choix : ";
+        std::cin >> choix;
+    } while(choix != false && choix != true);
+
+    effacerEcran();
+
+    return choix;
+}
+
+void Ihm::effacerEcran() const
+{
+    std::cout << "\033[H\033[2J";
+}
+
 void Ihm::feliciter(bool joueurActif)
 {
 #ifdef DEBUG
     std::cout << __PRETTY_FUNCTION__ << this << std::endl;
 #endif
+    effacerEcran();
     std::cout << "Bravo " << this->joueurs[joueurActif] << std::endl;
+
+    historique.push_back(this->joueurs[0] + " contre " + this->joueurs[1] +
+                         " : " + this->joueurs[joueurActif] + " à gagné");
 }
 
-void Ihm::afficherVersion()
+void Ihm::afficherVersion() const
 {
-    std::cout << "Jeu Neutron 1.2" << std::endl;
+    std::cout << "Jeu Neutron 2.0\n" << std::endl;
+
 }
 
-void Ihm::afficherInformations()
+void Ihm::afficherInformations() const
 {
     std::cout << this->joueurs[0] << " jouera avec les pions 0 et "
               << this->joueurs[1]
               << " jouera avec les pions 1. Le pion 2 est le neutron."
               << std::endl;
+}
+
+void Ihm::afficherHistorique() const
+{
+    if(historique.size() == 0)
+    {
+        std::cout << "Aucune partie n'a été jouée\n" << std::endl;
+    }
+    else
+    {
+        for(unsigned int i = 0; i < historique.size(); ++i)
+        {
+            std::cout << historique.at(i) << std::endl;
+        }
+        std::cout << std::endl;
+    }
+}
+
+void Ihm::changerOrdreJoueur()
+{
+    std::string stockageJoueur;
+
+    stockageJoueur   = this->joueurs[0];
+    this->joueurs[0] = this->joueurs[1];
+    this->joueurs[1] = stockageJoueur;
 }
