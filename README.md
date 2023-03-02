@@ -1,12 +1,25 @@
 [![C/C++ make](https://github.com/btssn-lasalle84/MP23-T1/actions/workflows/c-cpp.yml/badge.svg?branch=develop)](https://github.com/btssn-lasalle84/MP23-T1/actions/workflows/c-cpp.yml) [![C/C++ format](https://github.com/btssn-lasalle84/MP23-T1/actions/workflows/cppformat.yml/badge.svg?branch=develop)](https://github.com/btssn-lasalle84/MP23-T1/actions/workflows/cppformat.yml)
 
-# MP23-T1 Neutron
+# Mini-projet : Neutron
 
-- [MP23-T1 Neutron](#mp23-t1-neutron)
+- [Mini-projet : Neutron](#mini-projet--neutron)
   - [Présentation](#présentation)
+  - [Jira](#jira)
+    - [Les versions](#les-versions)
+    - [Feuille de route](#feuille-de-route)
+    - [Tickets](#tickets)
+      - [Version 1.0](#version-10)
+      - [Version 1.1](#version-11)
+      - [Version 2.0 (non publiée)](#version-20-non-publiée)
   - [Recette](#recette)
-  - [Informations](#informations)
+  - [Auteurs](#auteurs)
   - [Problèmes identifiés](#problèmes-identifiés)
+
+---
+
+> Ceci est un mini-projet de 2 étudiants de BTS SN option Informatique & Réseaux développé en C++. L'objectif était la mise en oeuvre d'une méthode agile [Kanban](https://fr.wikipedia.org/wiki/Kanban_(d%C3%A9veloppement)) avec les outils **Jira / Github** et en appliquant le _workflow_ [Gitflow](https://btssn-lasalle84.github.io/guides-developpement-logiciel/jira.html#ancre-gitflow). L'application devait être limitée à une interface en ligne de commande (console).
+
+---
 
 ## Présentation
 
@@ -17,17 +30,44 @@ Tous les pions se déplacent dans l’une des huit directions diagonales ou orth
 Le joueur qui commence la partie ne déplace pas le neutron au premier tour. Il déplace simplement une de ses pièces.
 
 Puis, à tour de rôle, les joueurs doivent d’abord, déplacer le neutron, puis déplacer un de leurs pions.
-Le joueur qui a amené le neutron dans son propre camp à gagné. Si un joueur ne peut pas déplacer le
-neutron ou un de ses pions il a perdu, de même s’il est obligé d’amener le neutron dans le camp adverse.
+
+Le joueur qui a amené le neutron dans son propre camp à gagné. Si un joueur ne peut pas déplacer le neutron ou un de ses pions il a perdu, de même s’il est obligé d’amener le neutron dans le camp adverse.
 
 Il existe donc quatre façons de gagner :
 
 - amener le neutron dans son propre camp, c’est-à-dire sur sa propre ligne de départ ;
 - forcer l’adversaire à amener lui-même le neutron sur la ligne de départ adverse ;
-- placer l’adversaire dans une situation où il ne peut pas déplacer le neutron ou un de ses pions
-(gagner à "l’étouffée") ;
-- que toutes les cases de l’adversaire soient occupées par cinq de ses pions ou par quatre de ses pions
-et le neutron.
+- placer l’adversaire dans une situation où il ne peut pas déplacer le neutron ou un de ses pions (gagner à "l’étouffée") ;
+- que toutes les cases de l’adversaire soient occupées par cinq de ses pions ou par quatre de ses pions et le neutron.
+
+## Jira
+
+Intégration avec Github :
+
+![](images/mp23-t1-jira-code.png)
+
+### Les versions
+
+![](images/mp23-t1-jira-versions.png)
+
+### Feuille de route
+
+![](images/mp23-t1-jira-roadmap.png)
+
+### Tickets
+
+#### Version 1.0
+
+![](images/mp23-t1-jira-version-1.0.png)
+
+#### Version 1.1
+
+![](images/mp23-t1-jira-version-1.2.png)
+
+#### Version 2.0 (non publiée)
+
+![](images/mp23-t1-jira-version-2.0.png)
+
 
 ## Recette
 
@@ -37,13 +77,10 @@ et le neutron.
 |Jouer une partie                    | X |   |
 |Afficher le déroulement d'une partie| X |   |
 
-## Informations
+## Auteurs
 
-- Auteurs :
   - Clement Trichet <<clement.trichet.pro@gmail.com>>
   - Mercklen Jérémy <<mercklenjeremy@gmail.com>>
-- Date : 2023/01/19
-- Version : 1.2
 
 ## Problèmes identifiés
 
